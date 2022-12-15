@@ -96,3 +96,6 @@ C:\Users\Mahmut\Desktop\SAUSEM\Projeler\Helper\Helper.API\obj\Debug\netcoreapp3.
 C:\Users\Mahmut\Desktop\SAUSEM\Projeler\Helper\Helper.API\obj\Debug\netcoreapp3.1\Helper.API.dll
 C:\Users\Mahmut\Desktop\SAUSEM\Projeler\Helper\Helper.API\obj\Debug\netcoreapp3.1\Helper.API.pdb
 C:\Users\Mahmut\Desktop\SAUSEM\Projeler\Helper\Helper.API\obj\Debug\netcoreapp3.1\Helper.API.genruntimeconfig.cache
+C:\Users\Mahmut\Desktop\SAUSEM\Projeler\Helper\Helper.API\bin\Debug\netcoreapp3.1\AutoMapper.dll
+C:\Users\Mahmut\Desktop\SAUSEM\Projeler\Helper\Helper.API\bin\Debug\netcoreapp3.1\AutoMapper.Extensions.Microsoft.DependencyInjection.dll
+C:\Users\Mahmut\Desktop\SAUSEM\Projeler\Helper\Helper.API\bin\Debug\netcoreapp3.1\System.Runtime.CompilerServices.Unsafe.dll

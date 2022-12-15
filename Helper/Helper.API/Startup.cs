@@ -1,5 +1,8 @@
+using Helper.Business.Answers;
 using Helper.Business.Helps;
+using Helper.Business.Mapper;
 using Helper.Business.Users;
+using Helper.DataAccess.Answers;
 using Helper.DataAccess.Helps;
 using Helper.DataAccess.Users;
 using Microsoft.AspNetCore.Builder;
@@ -29,6 +32,9 @@ namespace Helper.API
         {
             //services.AddRazorPages();
             services.AddControllers();
+            services.AddAutoMapper(typeof(AnswerProfile));
+            services.AddSingleton<IAnswerService, AnswerService>();
+            services.AddSingleton<IAnswerRepository, AnswerRepository>();
             services.AddSingleton<IUserService, UserService>();
             services.AddSingleton<IUserRepository, UserRepository>();
             services.AddSingleton<IHelpService, HelpService>();

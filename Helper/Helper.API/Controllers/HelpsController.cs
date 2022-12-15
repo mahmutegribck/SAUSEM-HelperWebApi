@@ -61,9 +61,9 @@ namespace Helper.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> CreateHelp([FromBody] Help help)
+        public async Task<IActionResult> CreateHelp(int categoryId, int userId,[FromBody] Help help)
         {
-            var createHelp = await _helpService.CreateHelp(help);
+            var createHelp = await _helpService.CreateHelp(categoryId, userId, help);
             //var user = createHelp.User;
            
             return CreatedAtAction("GetHelpById", new { id = createHelp.HelpId }, createHelp);
@@ -90,7 +90,7 @@ namespace Helper.API.Controllers
         /// <returns></returns>
         [HttpDelete]
         [Route("[action]/{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        public async Task<IActionResult> DeleteHelp(int id)
         {
             if (await _helpService.GetHelpById(id) != null)
             {
