@@ -1,4 +1,4 @@
-﻿using Helper.Entities.Entities;
+﻿using Helper.Entites.Entites;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,5 +17,7 @@ namespace Helper.DataAccess
 
         public DbSet<User> Users { get; set; }
         public DbSet<Help> Helps { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Answer> Answers { get; set; }
     }
 }

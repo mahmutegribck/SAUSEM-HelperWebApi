@@ -5,8 +5,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="12.0.0" />
+    <PackageReference Include="NSwag.AspNetCore" Version="13.18.0" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\Helper.DataAccess\Helper.DataAccess.csproj" />
-    <ProjectReference Include="..\Helper.Entities\Helper.Entities.csproj" />
+    <ProjectReference Include="..\Helper.Entites\Helper.Entites.csproj" />
   </ItemGroup>
 
 </Project>

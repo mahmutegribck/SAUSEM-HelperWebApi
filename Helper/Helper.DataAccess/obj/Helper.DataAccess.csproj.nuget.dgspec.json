@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mahmut\\Desktop\\SAUSEM\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj": {}
+    "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mahmut\\Desktop\\SAUSEM\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj": {
+    "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mahmut\\Desktop\\SAUSEM\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj",
         "projectName": "Helper.DataAccess",
-        "projectPath": "C:\\Users\\Mahmut\\Desktop\\SAUSEM\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj",
+        "projectPath": "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj",
         "packagesPath": "C:\\Users\\Mahmut\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mahmut\\Desktop\\SAUSEM\\Helper\\Helper.DataAccess\\obj\\",
+        "outputPath": "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,8 +32,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Mahmut\\Desktop\\SAUSEM\\Helper\\Helper.Entities\\Helper.Entities.csproj": {
-                "projectPath": "C:\\Users\\Mahmut\\Desktop\\SAUSEM\\Helper\\Helper.Entities\\Helper.Entities.csproj"
+              "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.Entites\\Helper.Entites.csproj": {
+                "projectPath": "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.Entites\\Helper.Entites.csproj"
               }
             }
           }
@@ -48,6 +48,10 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.0, )"
+            },
             "Microsoft.EntityFrameworkCore.SqlServer": {
               "target": "Package",
               "version": "[5.0.0, )"
@@ -57,6 +61,10 @@
               "suppressParent": "All",
               "target": "Package",
               "version": "[5.0.0, )"
+            },
+            "NSwag.AspNetCore": {
+              "target": "Package",
+              "version": "[13.18.0, )"
             }
           },
           "imports": [
@@ -79,14 +87,14 @@
         }
       }
     },
-    "C:\\Users\\Mahmut\\Desktop\\SAUSEM\\Helper\\Helper.Entities\\Helper.Entities.csproj": {
+    "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.Entites\\Helper.Entites.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mahmut\\Desktop\\SAUSEM\\Helper\\Helper.Entities\\Helper.Entities.csproj",
-        "projectName": "Helper.Entities",
-        "projectPath": "C:\\Users\\Mahmut\\Desktop\\SAUSEM\\Helper\\Helper.Entities\\Helper.Entities.csproj",
+        "projectUniqueName": "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.Entites\\Helper.Entites.csproj",
+        "projectName": "Helper.Entites",
+        "projectPath": "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.Entites\\Helper.Entites.csproj",
         "packagesPath": "C:\\Users\\Mahmut\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mahmut\\Desktop\\SAUSEM\\Helper\\Helper.Entities\\obj\\",
+        "outputPath": "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.Entites\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -118,6 +126,16 @@
       "frameworks": {
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
+          "dependencies": {
+            "AutoMapper.Extensions.Microsoft.DependencyInjection": {
+              "target": "Package",
+              "version": "[12.0.0, )"
+            },
+            "NSwag.AspNetCore": {
+              "target": "Package",
+              "version": "[13.18.0, )"
+            }
+          },
           "imports": [
             "net461",
             "net462",

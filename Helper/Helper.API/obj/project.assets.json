@@ -2001,7 +2001,8 @@
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0",
           "Helper.DataAccess": "1.0.0",
-          "Helper.Entities": "1.0.0"
+          "Helper.Entites": "1.0.0",
+          "NSwag.AspNetCore": "13.18.0"
         },
         "compile": {
           "bin/placeholder/Helper.Business.dll": {}
@@ -2015,8 +2016,9 @@
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0",
-          "Helper.Entities": "1.0.0",
-          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.0"
+          "Helper.Entites": "1.0.0",
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.0",
+          "NSwag.AspNetCore": "13.18.0"
         },
         "compile": {
           "bin/placeholder/Helper.DataAccess.dll": {}
@@ -2025,17 +2027,18 @@
           "bin/placeholder/Helper.DataAccess.dll": {}
         }
       },
-      "Helper.Entities/1.0.0": {
+      "Helper.Entites/1.0.0": {
         "type": "project",
         "framework": ".NETCoreApp,Version=v3.1",
         "dependencies": {
-          "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0"
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0",
+          "NSwag.AspNetCore": "13.18.0"
         },
         "compile": {
-          "bin/placeholder/Helper.Entities.dll": {}
+          "bin/placeholder/Helper.Entites.dll": {}
         },
         "runtime": {
-          "bin/placeholder/Helper.Entities.dll": {}
+          "bin/placeholder/Helper.Entites.dll": {}
         }
       }
     }
@@ -6786,18 +6789,18 @@
     },
     "Helper.Business/1.0.0": {
       "type": "project",
-      "path": "../../../Helper/Helper.Business/Helper.Business.csproj",
-      "msbuildProject": "../../../Helper/Helper.Business/Helper.Business.csproj"
+      "path": "../Helper.Business/Helper.Business.csproj",
+      "msbuildProject": "../Helper.Business/Helper.Business.csproj"
     },
     "Helper.DataAccess/1.0.0": {
       "type": "project",
-      "path": "../../../Helper/Helper.DataAccess/Helper.DataAccess.csproj",
-      "msbuildProject": "../../../Helper/Helper.DataAccess/Helper.DataAccess.csproj"
+      "path": "../Helper.DataAccess/Helper.DataAccess.csproj",
+      "msbuildProject": "../Helper.DataAccess/Helper.DataAccess.csproj"
     },
-    "Helper.Entities/1.0.0": {
+    "Helper.Entites/1.0.0": {
       "type": "project",
-      "path": "../../../Helper/Helper.Entities/Helper.Entities.csproj",
-      "msbuildProject": "../../../Helper/Helper.Entities/Helper.Entities.csproj"
+      "path": "../Helper.Entites/Helper.Entites.csproj",
+      "msbuildProject": "../Helper.Entites/Helper.Entites.csproj"
     }
   },
   "projectFileDependencyGroups": {
@@ -6814,11 +6817,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mahmut\\Desktop\\SAUSEM\\Projeler\\Helper\\Helper.API\\Helper.API.csproj",
+      "projectUniqueName": "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.API\\Helper.API.csproj",
       "projectName": "Helper.API",
-      "projectPath": "C:\\Users\\Mahmut\\Desktop\\SAUSEM\\Projeler\\Helper\\Helper.API\\Helper.API.csproj",
+      "projectPath": "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.API\\Helper.API.csproj",
       "packagesPath": "C:\\Users\\Mahmut\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mahmut\\Desktop\\SAUSEM\\Projeler\\Helper\\Helper.API\\obj\\",
+      "outputPath": "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -6839,8 +6842,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Mahmut\\Desktop\\SAUSEM\\Helper\\Helper.Business\\Helper.Business.csproj": {
-              "projectPath": "C:\\Users\\Mahmut\\Desktop\\SAUSEM\\Helper\\Helper.Business\\Helper.Business.csproj"
+            "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.Business\\Helper.Business.csproj": {
+              "projectPath": "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.Business\\Helper.Business.csproj"
             }
           }
         }

@@ -1,9 +1,10 @@
 ﻿using Helper.Business.Helps;
 using Helper.Business.Users;
-using Helper.Entities.Entities;
+using Helper.Entites.Entites;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
+//using System.ComponentModel.Design;
 using System.Threading.Tasks;
 
 namespace Helper.API.Controllers
@@ -15,7 +16,7 @@ namespace Helper.API.Controllers
         private IHelpService _helpService;
         private IUserService _userService;
 
-
+        
         public HelpsController(IHelpService helpService, IUserService userService)
         {
             _helpService = helpService;
@@ -32,7 +33,7 @@ namespace Helper.API.Controllers
         {
             var help = await _helpService.GetAllHelps();
 
-            if(help.Count == 0)
+            if (help.Count == 0)
             {
                 return NotFound();
             }
@@ -61,11 +62,11 @@ namespace Helper.API.Controllers
         /// <returns></returns>
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> CreateHelp(int categoryId, int userId,[FromBody] Help help)
+        public async Task<IActionResult> CreateHelp(int categoryId, int userId, [FromBody] Help help)
         {
             var createHelp = await _helpService.CreateHelp(categoryId, userId, help);
             //var user = createHelp.User;
-           
+
             return CreatedAtAction("GetHelpById", new { id = createHelp.HelpId }, createHelp);
         }
 

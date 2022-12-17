@@ -1,5 +1,5 @@
 ﻿using Helper.DataAccess.Helps;
-using Helper.Entities.Entities;
+using Helper.Entites.Entites;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace Helper.Business.Helps
 {
-    public class HelpService :IHelpService
+    public class HelpService : IHelpService
     {
         private IHelpRepository _helpRepository;
 
@@ -16,9 +16,9 @@ namespace Helper.Business.Helps
             _helpRepository = helpRepository;
         }
 
-        public async Task<Help> CreateHelp(Help help)
+        public async Task<Help> CreateHelp(int categoryId, int userId, Help help)
         {
-            return await _helpRepository.CreateHelp(help);
+            return await _helpRepository.CreateHelp(categoryId, userId, help);
         }
 
         public async Task DeleteHelp(int id)

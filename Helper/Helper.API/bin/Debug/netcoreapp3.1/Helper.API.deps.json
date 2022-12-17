@@ -1577,7 +1577,8 @@
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0",
           "Helper.DataAccess": "1.0.0",
-          "Helper.Entities": "1.0.0"
+          "Helper.Entites": "1.0.0",
+          "NSwag.AspNetCore": "13.18.0"
         },
         "runtime": {
           "Helper.Business.dll": {}
@@ -1589,8 +1590,9 @@
       "Helper.DataAccess/1.0.0": {
         "dependencies": {
           "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0",
-          "Helper.Entities": "1.0.0",
-          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.0"
+          "Helper.Entites": "1.0.0",
+          "Microsoft.EntityFrameworkCore.SqlServer": "5.0.0",
+          "NSwag.AspNetCore": "13.18.0"
         },
         "runtime": {
           "Helper.DataAccess.dll": {}
@@ -1599,15 +1601,16 @@
           "Helper.DataAccess.dll": {}
         }
       },
-      "Helper.Entities/1.0.0": {
+      "Helper.Entites/1.0.0": {
         "dependencies": {
-          "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0"
+          "AutoMapper.Extensions.Microsoft.DependencyInjection": "12.0.0",
+          "NSwag.AspNetCore": "13.18.0"
         },
         "runtime": {
-          "Helper.Entities.dll": {}
+          "Helper.Entites.dll": {}
         },
         "compile": {
-          "Helper.Entities.dll": {}
+          "Helper.Entites.dll": {}
         }
       },
       "Microsoft.AspNetCore.Antiforgery/3.1.0.0": {
@@ -4012,7 +4015,7 @@
       "serviceable": false,
       "sha512": ""
     },
-    "Helper.Entities/1.0.0": {
+    "Helper.Entites/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""

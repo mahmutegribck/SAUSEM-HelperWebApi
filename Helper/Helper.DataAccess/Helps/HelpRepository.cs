@@ -1,7 +1,8 @@
-﻿using Helper.Entities.Entities;
+﻿using Helper.Entites.Entites;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,12 +10,32 @@ namespace Helper.DataAccess.Helps
 {
     public class HelpRepository : IHelpRepository
     {
-        public async Task<Help> CreateHelp(Help help)
+        //private readonly HelperDbContext _helperDbContext;
+        //public HelpRepository(HelperDbContext helperDbContext)
+        //{
+        //    _helperDbContext = helperDbContext;
+        //}
+        public async Task<Help> CreateHelp(int categoryId, int userId, Help help)
         {
             using (var helperDbContext = new HelperDbContext())
             {
-                helperDbContext.Helps.Add(help);
-                await helperDbContext.SaveChangesAsync();
+                var helpCategoryClient = await helperDbContext.Categories.Where(c => c.CategoryId == categoryId).FirstOrDefaultAsync();
+                var helpUserClient = await helperDbContext.Users.Where(u => u.UserID == userId).FirstOrDefaultAsync();
+
+                var helpCategory = new Help()
+                {
+                    Category = helpCategoryClient,
+                };
+                helperDbContext.Add(helpCategory);
+
+                // var helpUser = new Help()
+                //{ User = helpUserClient, };
+
+                // helperDbContext.Add(helpUser);
+                helperDbContext.Add(help);
+
+                // _helperDbContext.Helps.Add(help);
+                // await _helperDbContext.SaveChangesAsync();
                 return help;
             }
         }

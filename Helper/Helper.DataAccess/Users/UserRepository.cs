@@ -1,7 +1,8 @@
-﻿using Helper.Entities.Entities;
+﻿using Helper.Entites.Entites;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -33,7 +34,7 @@ namespace Helper.DataAccess.Users
         {
             using (var helperDbContext = new HelperDbContext())
             {
-                return await helperDbContext.Users.ToListAsync();
+                return await helperDbContext.Users.OrderBy(u => u.UserID).ToListAsync();
             }
         }
 

@@ -1,6 +1,6 @@
 ﻿
 using Helper.Business.Users;
-using Helper.Entities.Entities;
+using Helper.Entites.Entites;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -15,7 +15,7 @@ namespace Helper.Controllers
 
         public UsersController(IUserService userService)
         {
-            _userService = userService; 
+            _userService = userService;
         }
 
 
@@ -29,7 +29,7 @@ namespace Helper.Controllers
         {
             var user = await _userService.GetAllUsers();
 
-            if(user.Count == 0)
+            if (user.Count == 0)
             {
                 return NotFound();
             }
@@ -37,7 +37,7 @@ namespace Helper.Controllers
             {
                 return Ok(user);
             }
-            
+
         }
 
         /// <summary>
@@ -49,7 +49,7 @@ namespace Helper.Controllers
         public async Task<IActionResult> GetUserById(int id)
         {
             var user = await _userService.GetUserById(id);
-            if(user != null)
+            if (user != null)
             {
                 return Ok(user);
             }
@@ -63,9 +63,9 @@ namespace Helper.Controllers
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> CreateUser([FromBody] User user)
-        {   
+        {
             var createUser = await _userService.CreateUser(user);
-            return CreatedAtAction("GetUserById", new {id = createUser.UserID},createUser);
+            return CreatedAtAction("GetUserById", new { id = createUser.UserID }, createUser);
         }
 
         /// <summary>
@@ -76,7 +76,7 @@ namespace Helper.Controllers
         [Route("[action]")]
         public async Task<IActionResult> UpdateUser([FromBody] User user)
         {
-            if(await _userService.GetUserById(user.UserID)!= null)
+            if (await _userService.GetUserById(user.UserID) != null)
             {
                 return Ok(await _userService.UpdateUser(user));
             }
@@ -91,7 +91,7 @@ namespace Helper.Controllers
         [Route("[action]/{id}")]
         public async Task<IActionResult> DeleteUser(int id)
         {
-            if(await _userService.GetUserById(id) != null)
+            if (await _userService.GetUserById(id) != null)
             {
                 await _userService.DeleteUser(id);
                 return Ok();
