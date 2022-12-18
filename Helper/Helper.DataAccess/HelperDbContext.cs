@@ -1,4 +1,6 @@
 ﻿using Helper.Entites.Entites;
+using Helper.Entites.Identity;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -6,8 +8,11 @@ using System.Text;
 
 namespace Helper.DataAccess
 {
-    public class HelperDbContext : DbContext
+    public class HelperDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,string>
     {
+        public HelperDbContext() { }
+        public HelperDbContext(DbContextOptions<HelperDbContext> dbContext) : base(dbContext) { }  
+
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             base.OnConfiguring(optionsBuilder);
