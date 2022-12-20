@@ -1,6 +1,8 @@
 using Helper.Business.Answers;
+using Helper.Business.Auth;
 using Helper.Business.Helps;
 using Helper.Business.Mapper;
+using Helper.Business.Security;
 using Helper.Business.Users;
 using Helper.DataAccess;
 using Helper.DataAccess.Answers;
@@ -37,76 +39,77 @@ namespace Helper.API
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddControllers();
+            
             services.AddAutoMapper(typeof(AnswerProfile));
-            services.AddSingleton<IAnswerService, AnswerService>();
-            services.AddSingleton<IAnswerRepository, AnswerRepository>();
-            services.AddSingleton<IUserService, UserService>();
-            services.AddSingleton<IUserRepository, UserRepository>();
-            services.AddSingleton<IHelpService, HelpService>();
-            services.AddSingleton<IHelpRepository, HelpRepository>();
-            //services.AddSwaggerDocument(config =>
-            //{
-            //    config.PostProcess = (doc =>
-            //    {
-            //        doc.Info.Title = "Helper Api";
-            //    });
-            //});
+            services.AddScoped<IAnswerService, AnswerService>();
+            services.AddScoped<IAnswerRepository, AnswerRepository>();
+            services.AddScoped<IUserService, UserService>();
+            services.AddScoped<IUserRepository, UserRepository>();
+            services.AddScoped<IHelpService, HelpService>();
+            services.AddScoped<IHelpRepository, HelpRepository>();
+            services.AddScoped<IAuthService, AuthService>();
+            services.AddScoped<ISecurityService, JWTSecurityToken>();
+            
+
+
 
             services.AddDbContext<HelperDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
-            //services.AddIdentityCore<ApplicationUser>().AddEntityFrameworkStores<HelperDbContext>();
-            //services.Configure<IdentityOptions>(options =>
-            //{
-            //    options.Password.RequireDigit = false;
-            //    options.Password.RequireNonAlphanumeric = false;
-            //    options.Password.RequireLowercase = false;
-            //    options.Password.RequireUppercase = false;
-            //    options.Password.RequiredLength = 4;
-            //}
-            //);
-            services.AddIdentity<ApplicationUser, ApplicationRole>(options => {
+
+            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            {
+                options.Password.RequireDigit = true;
+                options.Password.RequireLowercase = true;
                 options.Password.RequiredLength = 6;
-                options.Password.RequireNonAlphanumeric = false;
-                options.Password.RequiredUniqueChars = 0;
-                options.Password.RequireUppercase = false;
-                options.Password.RequireLowercase = false;
-                options.Password.RequireDigit = false;
                 options.User.RequireUniqueEmail = true;
-                options.Lockout.MaxFailedAccessAttempts = 5;
-                // yeni kullanýcý oto. kilitlensin mi ? 
                 options.Lockout.AllowedForNewUsers = false;
-                // oturum açmasý için mail onaylý olmasý gerekir
-                options.SignIn.RequireConfirmedEmail = false;
-                options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+
+
+                //options.Password.RequireNonAlphanumeric = false;
+                //options.Password.RequiredUniqueChars = 0;
+                //options.Password.RequireUppercase = false;
+
+
+
+                //options.Lockout.MaxFailedAccessAttempts = 5;
+                //// yeni kullanýcý oto. kilitlensin mi ? 
+                //options.Lockout.AllowedForNewUsers = false;
+                //// oturum açmasý için mail onaylý olmasý gerekir
+                //options.SignIn.RequireConfirmedEmail = false;
+                //options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
             })
                 .AddEntityFrameworkStores<HelperDbContext>()
                 .AddDefaultTokenProviders();
-            services.ConfigureApplicationCookie(options =>
+
+            //services.ConfigureApplicationCookie(options =>
+            //{
+            //    options.Cookie.Name = "member_cookie";
+            //    options.Cookie.HttpOnly = true;
+            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(90);
+            //    options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
+            //    options.SlidingExpiration = true;
+            //});
+            //services.AddSession();
+
+            //services.AddDistributedMemoryCache();
+
+            services.AddAuthentication(auth =>
             {
-                options.Cookie.Name = "member_cookie";
-                options.Cookie.HttpOnly = true;
-                options.ExpireTimeSpan = TimeSpan.FromMinutes(90);
-                options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
-                options.SlidingExpiration = true;
-            });
-            services.AddSession();
-            services.AddDistributedMemoryCache();
-            services.AddAuthentication(options =>
-            {
-                options.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
-                options.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
-            }).AddJwtBearer(options => {
-                options.SaveToken = true;
-                options.RequireHttpsMetadata = false;
-                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters()
+                auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
+                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                //auth.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
+            }).AddJwtBearer(options =>
+            {   //options.SaveToken = true;
+                // options.RequireHttpsMetadata = false;
+                options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                 {
                     ValidateIssuer = true,
                     ValidateAudience = true,
-                    ValidAudience = "http://google.com",
-                    ValidIssuer = "http://google.com",
-                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MySuperSecureKey"))
+                    ValidAudience = Configuration["Authentication:Audience"],
+                    ValidIssuer = Configuration["Authentication:Issuer"],
+                    RequireExpirationTime = true,
+                    IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Authentication:Key"])),
+                    ValidateIssuerSigningKey = true,
                 };
             });
 
@@ -120,16 +123,36 @@ namespace Helper.API
                     Description = "ASP.NET Core 3.1 Web API"
                 });
                 // To Enable authorization using Swagger (JWT)
-                swagger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme()
+                swagger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
                 {
-                    Name = "Authorization",
-                    Type = SecuritySchemeType.ApiKey,
-                    Scheme = "Bearer",
-                    BearerFormat = "JWT",
                     In = ParameterLocation.Header,
-                    Description = "JWT Authorization header using the Bearer scheme. \r\n\r\n Enter 'Bearer' [space] and then your token in the text input below.\r\n\r\nExample: \"Bearer 12345abcdef\"",
+                    Description = "Insert JWT Token",
+                    Name = "Authorization",
+                    Type = SecuritySchemeType.Http,
+                    BearerFormat = "JWT",
+                    Scheme = "bearer"
+                    
+                    
+                    
                 });
             });
+            services.AddSwaggerGen(w => w.AddSecurityRequirement(
+                new OpenApiSecurityRequirement
+                {
+                    {
+                        new OpenApiSecurityScheme
+                        {
+                            Reference = new OpenApiReference
+                            {
+                                Type = ReferenceType.SecurityScheme,
+                                Id = "Bearer"
+                            }
+                        },
+                        new string[]{}
+                    }
+                }));
+
+            services.AddControllers();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -142,7 +165,7 @@ namespace Helper.API
 
             app.UseHttpsRedirection();
 
-            app.UseRouting();
+
             //app.UseOpenApi();
             //app.UseSwaggerUi3();
             //app.UseIdentity();
@@ -152,7 +175,12 @@ namespace Helper.API
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1");
 
             });
+
+            
+            app.UseRouting();
+             
             app.UseAuthentication();
+            
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

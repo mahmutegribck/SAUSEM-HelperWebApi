@@ -1,6 +1,7 @@
 ﻿using Helper.Business.Helps;
 using Helper.Business.Users;
 using Helper.Entites.Entites;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -29,6 +30,7 @@ namespace Helper.API.Controllers
         /// <returns></returns>
         [HttpGet]
         [Route("[action]")]
+        [Authorize]
         public async Task<IActionResult> GetAllHelps()
         {
             var help = await _helpService.GetAllHelps();

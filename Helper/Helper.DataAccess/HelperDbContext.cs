@@ -8,10 +8,10 @@ using System.Text;
 
 namespace Helper.DataAccess
 {
-    public class HelperDbContext : IdentityDbContext<ApplicationUser,ApplicationRole,string>
+    public class HelperDbContext : IdentityDbContext
     {
         public HelperDbContext() { }
-        public HelperDbContext(DbContextOptions<HelperDbContext> dbContext) : base(dbContext) { }  
+        public HelperDbContext(DbContextOptions dbContext) : base(dbContext) { }  
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -20,6 +20,7 @@ namespace Helper.DataAccess
 
         }
 
+        //public DbSet<ApplicationUser> applicationUsers { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Help> Helps { get; set; }
         public DbSet<Category> Categories { get; set; }
