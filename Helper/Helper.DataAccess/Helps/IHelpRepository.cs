@@ -9,10 +9,16 @@ namespace Helper.DataAccess.Helps
     public interface IHelpRepository
     {
         Task<List<Help>> GetAllHelps();
+
+        Task<List<Help>> GetAllUserHelps(string id);
+
         Task<Help> GetHelpById(int id);
 
-        Task<Help> CreateHelp(int categoryId, int userId, Help help);
-        Task<Help> UpdateHelp(Help help);
-        Task DeleteHelp(int id);
+        Task CreateHelp(Help help);
+
+        Task UpdateHelp(string IdentityUserId, Help help);
+
+        Task DeleteHelp(string IdentityUserId, int id);
+
     }
 }

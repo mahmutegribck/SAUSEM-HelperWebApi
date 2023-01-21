@@ -4,7 +4,8 @@ using System.Text;
 
 namespace Helper.Business.Answers.Dtos
 {
-    internal class DeleteAnswerDto
+    public class DeleteAnswerDto
     {
+
     }
 }

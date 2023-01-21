@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 namespace Helper.Entites.Entites
 {
@@ -22,9 +23,18 @@ namespace Helper.Entites.Entites
         [Required]
         public DateTime AnswerDate { get; set; }
 
-        public Help Help { get; set; }
+        //public Help Help { get; set; }
 
-        public int? HelpId { get; set; }
+        //public int? HelpId { get; set; }
+
+        public IdentityUser IdentityUser { get; set; }
+
+        public string IdentityUserId { get; set; }
+
+        public Help Help { get; set; }
+        public int HelpId { get; set; }
+
+
 
     }
 }

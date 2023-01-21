@@ -1,11 +1,13 @@
 using Helper.Business.Answers;
 using Helper.Business.Auth;
+using Helper.Business.Categories;
 using Helper.Business.Helps;
 using Helper.Business.Mapper;
 using Helper.Business.Security;
 using Helper.Business.Users;
 using Helper.DataAccess;
 using Helper.DataAccess.Answers;
+using Helper.DataAccess.Categories;
 using Helper.DataAccess.Helps;
 using Helper.DataAccess.Users;
 using Helper.Entites.Identity;
@@ -40,15 +42,23 @@ namespace Helper.API
         public void ConfigureServices(IServiceCollection services)
         {
             
-            services.AddAutoMapper(typeof(AnswerProfile));
+            services.AddAutoMapper(typeof(MapperProfile));
+
             services.AddScoped<IAnswerService, AnswerService>();
             services.AddScoped<IAnswerRepository, AnswerRepository>();
+
             services.AddScoped<IUserService, UserService>();
             services.AddScoped<IUserRepository, UserRepository>();
+
             services.AddScoped<IHelpService, HelpService>();
             services.AddScoped<IHelpRepository, HelpRepository>();
+
             services.AddScoped<IAuthService, AuthService>();
+
             services.AddScoped<ISecurityService, JWTSecurityToken>();
+
+            services.AddScoped<ICategoryService, CategoryService>();
+            services.AddScoped<ICategoryRepository, CategoryRepository>();
             
 
 
@@ -67,7 +77,7 @@ namespace Helper.API
 
                 //options.Password.RequireNonAlphanumeric = false;
                 //options.Password.RequiredUniqueChars = 0;
-                //options.Password.RequireUppercase = false;
+                options.Password.RequireUppercase = false;
 
 
 
@@ -76,7 +86,7 @@ namespace Helper.API
                 //options.Lockout.AllowedForNewUsers = false;
                 //// oturum açmasý için mail onaylý olmasý gerekir
                 //options.SignIn.RequireConfirmedEmail = false;
-                //options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+";
+                options.User.AllowedUserNameCharacters = "abcçdefgðhiýjklmnoöpqrsþtuüvwxyzABCÇDEFGÐHIÝJKLMNOÖPQRSÞTUÜVWXYZ0123456789 ";
             })
                 .AddEntityFrameworkStores<HelperDbContext>()
                 .AddDefaultTokenProviders();
@@ -119,8 +129,8 @@ namespace Helper.API
                 swagger.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "JWT Token Authentication API",
-                    Description = "ASP.NET Core 3.1 Web API"
+                    Title = "Helper API"
+                   
                 });
                 // To Enable authorization using Swagger (JWT)
                 swagger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme

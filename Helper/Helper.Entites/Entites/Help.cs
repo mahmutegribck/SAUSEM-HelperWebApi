@@ -3,11 +3,17 @@ using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
+using Microsoft.AspNetCore.Identity;
 
 namespace Helper.Entites.Entites
 {
     public class Help
     {
+        public Help()
+        {
+            this.Tags = new HashSet<Tag>();
+        }
+
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         [Required]
         public int HelpId { get; set; }
@@ -24,15 +30,21 @@ namespace Helper.Entites.Entites
         [Required]
         public string HelpText { get; set; }
 
-        // [Required]
-        //public int UserId { get; set; }     
-        //public User User { get; set; }
+        [Required]
+        public DateTime HelpDate { get; set; }
+
+        public IdentityUser IdentityUser { get; set; }
+
+        public string IdentityUserId { get; set; }
+
+        public ICollection<Answer> Answer { get; set; }
+
+    
 
         public Category Category { get; set; }
 
-        [Required]
         public int CategoryId { get; set; }
 
-        public ICollection<Answer> Answers { get; set; }
+        public ICollection<Tag> Tags { get; set; }
     }
 }

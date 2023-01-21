@@ -13,6 +13,9 @@ namespace Helper.Business.Auth.Dtos
         public string Email { get; set; }
 
         [Required]
+        public string FullName { get; set; }    
+
+        [Required]
         [StringLength(50, MinimumLength =5)]
         public string Password { get; set; }
 

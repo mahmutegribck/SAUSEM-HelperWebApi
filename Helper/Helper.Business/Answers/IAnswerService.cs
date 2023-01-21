@@ -9,11 +9,17 @@ namespace Helper.Business.Answers
 {
     public interface IAnswerService
     {
-        Task<List<AnswerAllListDto>> GetAllAnswers();
-        Task<Answer> GetAnswerById(int id);
+        Task<List<GetAnswerDto>> GetAllUserAnswers(string id);
 
-        Task CreateAnswer(int helpId, CreateAnswerDto createAnswerDto);
-        Task UpdateAnswer(UpdateAnswerDto updateAnswerDto);
-        Task DeleteAnswer(int id);
+        Task<List<GetAnswerDto>> GetAllAnswers();
+
+        Task CreateAnswer(string IdentityUserId, CreateAnswerDto createAnswerDto);
+
+        Task DeleteAnswer(string IdentityUserId, int answerId);
+
+        Task UpdateAnswer(string IdentityUserId, UpdateAnswerDto updateAnswerDto);
+
+        Task<GetAnswerDto> GetAnswerById(int id);
+      
     }
 }

@@ -82,5 +82,4 @@ C:\Users\Mahmut\Desktop\Helper\Helper.API\bin\Debug\netcoreapp3.1\Microsoft.Open
 C:\Users\Mahmut\Desktop\Helper\Helper.API\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.Swagger.dll
 C:\Users\Mahmut\Desktop\Helper\Helper.API\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerGen.dll
 C:\Users\Mahmut\Desktop\Helper\Helper.API\bin\Debug\netcoreapp3.1\Swashbuckle.AspNetCore.SwaggerUI.dll
-C:\Users\Mahmut\Desktop\Helper\Helper.API\bin\Debug\netcoreapp3.1\SendGrid.dll
-C:\Users\Mahmut\Desktop\Helper\Helper.API\bin\Debug\netcoreapp3.1\StarkbankEcdsa.dll
+C:\Users\Mahmut\Desktop\Helper\Helper.API\obj\Debug\netcoreapp3.1\Helper.API.MvcApplicationPartsAssemblyInfo.cs

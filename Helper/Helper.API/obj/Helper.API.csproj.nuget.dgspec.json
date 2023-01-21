@@ -138,10 +138,6 @@
             "Microsoft.AspNetCore.WebUtilities": {
               "target": "Package",
               "version": "[2.2.0, )"
-            },
-            "SendGrid": {
-              "target": "Package",
-              "version": "[9.28.1, )"
             }
           },
           "imports": [

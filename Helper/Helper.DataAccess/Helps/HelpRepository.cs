@@ -10,70 +10,106 @@ namespace Helper.DataAccess.Helps
 {
     public class HelpRepository : IHelpRepository
     {
-        //private readonly HelperDbContext _helperDbContext;
-        //public HelpRepository(HelperDbContext helperDbContext)
-        //{
-        //    _helperDbContext = helperDbContext;
-        //}
-        public async Task<Help> CreateHelp(int categoryId, int userId, Help help)
+        private readonly HelperDbContext _helperDbContext;
+        public HelpRepository(HelperDbContext helperDbContext)
         {
-            using (var helperDbContext = new HelperDbContext())
-            {
-                var helpCategoryClient = await helperDbContext.Categories.Where(c => c.CategoryId == categoryId).FirstOrDefaultAsync();
-                var helpUserClient = await helperDbContext.Users.Where(u => u.UserID == userId).FirstOrDefaultAsync();
-
-                var helpCategory = new Help()
-                {
-                    Category = helpCategoryClient,
-                };
-                helperDbContext.Add(helpCategory);
-
-                // var helpUser = new Help()
-                //{ User = helpUserClient, };
-
-                // helperDbContext.Add(helpUser);
-                helperDbContext.Add(help);
-
-                // _helperDbContext.Helps.Add(help);
-                // await _helperDbContext.SaveChangesAsync();
-                return help;
-            }
+            _helperDbContext = helperDbContext;
+        }
+        public async Task CreateHelp(Help help)
+        {
+            help.HelpDate = DateTime.Now;
+            await _helperDbContext.Helps.AddAsync(help);
+            await _helperDbContext.SaveChangesAsync();              
+            
         }
 
-        public async Task DeleteHelp(int id)
+        public async Task DeleteHelp(string IdentityUserId, int id)
         {
-            using (var helperDbContext = new HelperDbContext())
+            
+            var deleteHelp = await GetHelpById(id);
+
+            if (deleteHelp != null)
             {
-                var deleteHelp = await GetHelpById(id);
-                helperDbContext.Helps.Remove(deleteHelp);
-                await helperDbContext.SaveChangesAsync();
+                if(deleteHelp.IdentityUserId ==IdentityUserId)
+                {
+                    _helperDbContext.Helps.Remove(deleteHelp);
+                    await _helperDbContext.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("User can not delete this help.");
+                }
             }
+            else
+            {
+                throw new Exception("Not Found Answer");
+            }
+            
         }
 
         public async Task<List<Help>> GetAllHelps()
         {
-            using (var helperDbContext = new HelperDbContext())
+
+            var helps = await _helperDbContext.Helps.OrderByDescending(h => h.HelpDate).ToListAsync();
+
+            if (helps.Count > 0)
             {
-                return await helperDbContext.Helps.ToListAsync();
+                return helps;
+            }
+            else
+            {
+                throw new Exception("Not Found Help");
+            }
+
+        }
+
+        public async Task<List<Help>> GetAllUserHelps(string id)
+        {
+            var userHelps = await _helperDbContext.Helps.Where(h => h.IdentityUser.Id == id).OrderByDescending(h => h.HelpDate).ToListAsync();
+
+            if (userHelps.Count > 0)
+            {
+                return userHelps;
+            }
+            else
+            {
+                throw new Exception("Not Found User Helps");
             }
         }
 
         public async Task<Help> GetHelpById(int id)
         {
-            using (var helperDbContext = new HelperDbContext())
+            var help = await _helperDbContext.Helps.FindAsync(id);
+            if(help != null)
             {
-                return await helperDbContext.Helps.FindAsync(id);
+                return help;
+            }
+            else
+            {
+                throw new Exception("Not Found Help");
             }
         }
 
-        public async Task<Help> UpdateHelp(Help help)
+        public async Task UpdateHelp(string IdentityUserId, Help help)
         {
-            using (var helperDbContext = new HelperDbContext())
-            {
-                helperDbContext.Helps.Update(help);
-                await helperDbContext.SaveChangesAsync();
-                return help;
 
+            var helpUpdate = await _helperDbContext.Helps.FindAsync(help.HelpId);
+
+            if(helpUpdate != null )
+            {
+                if(helpUpdate.IdentityUserId == IdentityUserId)
+                {
+                    _helperDbContext.Helps.Update(help);
+                    await _helperDbContext.SaveChangesAsync();
+                }
+                else
+                {
+                    throw new Exception("User can not update this answer");
+                }
+            }
+            else
+            {
+                throw new Exception("Not Found Answer");
             }
         }
     }

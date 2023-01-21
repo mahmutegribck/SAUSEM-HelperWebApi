@@ -19,6 +19,21 @@ namespace Helper.DataAccess.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("ProductVersion", "5.0.8");
 
+            modelBuilder.Entity("HelpTag", b =>
+                {
+                    b.Property<int>("HelpsHelpId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("TagsTagId")
+                        .HasColumnType("int");
+
+                    b.HasKey("HelpsHelpId", "TagsTagId");
+
+                    b.HasIndex("TagsTagId");
+
+                    b.ToTable("HelpTag");
+                });
+
             modelBuilder.Entity("Helper.Entites.Entites.Answer", b =>
                 {
                     b.Property<int>("AnswerId")
@@ -37,12 +52,17 @@ namespace Helper.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("HelpId")
+                    b.Property<int>("HelpId")
                         .HasColumnType("int");
+
+                    b.Property<string>("IdentityUserId")
+                        .HasColumnType("nvarchar(450)");
 
                     b.HasKey("AnswerId");
 
                     b.HasIndex("HelpId");
+
+                    b.HasIndex("IdentityUserId");
 
                     b.ToTable("Answers");
                 });
@@ -55,6 +75,7 @@ namespace Helper.DataAccess.Migrations
                         .UseIdentityColumn();
 
                     b.Property<string>("CategoryName")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("CategoryId");
@@ -72,6 +93,9 @@ namespace Helper.DataAccess.Migrations
                     b.Property<int>("CategoryId")
                         .HasColumnType("int");
 
+                    b.Property<DateTime>("HelpDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<string>("HelpTag")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
@@ -84,11 +108,31 @@ namespace Helper.DataAccess.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("IdentityUserId")
+                        .HasColumnType("nvarchar(450)");
+
                     b.HasKey("HelpId");
 
                     b.HasIndex("CategoryId");
 
+                    b.HasIndex("IdentityUserId");
+
                     b.ToTable("Helps");
+                });
+
+            modelBuilder.Entity("Helper.Entites.Entites.Tag", b =>
+                {
+                    b.Property<int>("TagId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .UseIdentityColumn();
+
+                    b.Property<string>("TagName")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("TagId");
+
+                    b.ToTable("Tags");
                 });
 
             modelBuilder.Entity("Helper.Entites.Entites.User", b =>
@@ -317,13 +361,36 @@ namespace Helper.DataAccess.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("HelpTag", b =>
+                {
+                    b.HasOne("Helper.Entites.Entites.Help", null)
+                        .WithMany()
+                        .HasForeignKey("HelpsHelpId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Helper.Entites.Entites.Tag", null)
+                        .WithMany()
+                        .HasForeignKey("TagsTagId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("Helper.Entites.Entites.Answer", b =>
                 {
                     b.HasOne("Helper.Entites.Entites.Help", "Help")
-                        .WithMany("Answers")
-                        .HasForeignKey("HelpId");
+                        .WithMany("Answer")
+                        .HasForeignKey("HelpId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("IdentityUserId");
 
                     b.Navigation("Help");
+
+                    b.Navigation("IdentityUser");
                 });
 
             modelBuilder.Entity("Helper.Entites.Entites.Help", b =>
@@ -334,7 +401,13 @@ namespace Helper.DataAccess.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityUser", "IdentityUser")
+                        .WithMany()
+                        .HasForeignKey("IdentityUserId");
+
                     b.Navigation("Category");
+
+                    b.Navigation("IdentityUser");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -395,7 +468,7 @@ namespace Helper.DataAccess.Migrations
 
             modelBuilder.Entity("Helper.Entites.Entites.Help", b =>
                 {
-                    b.Navigation("Answers");
+                    b.Navigation("Answer");
                 });
 #pragma warning restore 612, 618
         }

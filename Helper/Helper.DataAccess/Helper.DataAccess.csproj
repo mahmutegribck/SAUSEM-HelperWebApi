@@ -18,4 +18,8 @@
     <ProjectReference Include="..\Helper.Entites\Helper.Entites.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Tags\" />
+  </ItemGroup>
+
 </Project>

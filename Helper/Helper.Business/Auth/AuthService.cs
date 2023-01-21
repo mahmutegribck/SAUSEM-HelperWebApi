@@ -98,7 +98,7 @@ namespace Helper.Business.Auth
                 var identityUser = new IdentityUser
                 {
                     Email = model.Email,
-                    UserName = model.Email
+                    UserName = model.FullName
                 };
 
                 var result = await _userManager.CreateAsync(identityUser, model.Password);

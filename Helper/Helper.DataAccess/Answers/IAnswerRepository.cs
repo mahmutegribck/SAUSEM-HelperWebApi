@@ -9,10 +9,14 @@ namespace Helper.DataAccess.Answers
     public interface IAnswerRepository
     {
         Task<List<Answer>> GetAllAnswers();
+
+        Task<List<Answer>> GetAllUserAnswers(string id);
+
+
         Task<Answer> GetAnswerById(int id);
 
-        Task CreateAnswer(int helpId, Answer answer);
-        Task UpdateAnswer(Answer answer);
-        Task DeleteAnswer(int id);
+        Task CreateAnswer(Answer answer);
+        Task UpdateAnswer(string IdentityUserId, Answer answer);
+        Task DeleteAnswer(string IdentityUserId, int id);
     }
 }

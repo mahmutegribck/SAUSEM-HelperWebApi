@@ -1,7 +1,11 @@
-﻿using Helper.DataAccess.Helps;
+﻿using AutoMapper;
+using Helper.Business.Answers.Dtos;
+using Helper.Business.Helps.Dtos;
+using Helper.DataAccess.Helps;
 using Helper.Entites.Entites;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -9,33 +13,51 @@ namespace Helper.Business.Helps
 {
     public class HelpService : IHelpService
     {
-        private IHelpRepository _helpRepository;
+        private readonly IHelpRepository _helpRepository;
 
-        public HelpService(IHelpRepository helpRepository)
+        private readonly IMapper _mapper;
+
+        public HelpService(IMapper mapper, IHelpRepository helpRepository)
         {
             _helpRepository = helpRepository;
+            _mapper = mapper;
         }
 
-        public async Task<Help> CreateHelp(int categoryId, int userId, Help help)
+        public async Task CreateHelp(string IdentityUserId, CreateHelpDto createHelpDto)
         {
-            return await _helpRepository.CreateHelp(categoryId, userId, help);
+
+            Help help = _mapper.Map<Help>(createHelpDto);
+            help.IdentityUserId = IdentityUserId;
+            await _helpRepository.CreateHelp(help);
+
+
         }
 
-        public async Task DeleteHelp(int id)
+        public async Task DeleteHelp(string IdentityUserId, int id)
         {
-            await _helpRepository.DeleteHelp(id);
+            await _helpRepository.DeleteHelp(IdentityUserId, id);
         }
 
-        public async Task<List<Help>> GetAllHelps()
+        public async Task<List<GetHelpDto>> GetAllHelps()
         {
-            return await _helpRepository.GetAllHelps();
+            var helps = _mapper.Map<List<GetHelpDto>>(await _helpRepository.GetAllHelps());
+            return helps.ToList();
+            
         }
 
-        public async Task<Help> GetHelpById(int id)
+        public async Task<List<GetHelpDto>> GetAllUserHelps(string id)
+        {
+            var userHelps = _mapper.Map<List<GetHelpDto>>(await _helpRepository.GetAllUserHelps(id));
+            return userHelps.ToList();
+        }
+
+
+        public async Task<GetHelpDto> GetHelpById(int id)
         {
             if (id > 0)
             {
-                return await _helpRepository.GetHelpById(id);
+                var userHelp = _mapper.Map<GetHelpDto>(await _helpRepository.GetHelpById(id));  
+                return userHelp;
             }
             else
             {
@@ -43,9 +65,13 @@ namespace Helper.Business.Helps
             }
         }
 
-        public async Task<Help> UpdateHelp(Help help)
+        public async Task UpdateHelp(string IdentityUserId, UpdateHelpDto updateHelpDto)
         {
-            return await _helpRepository.UpdateHelp(help);
+            Help help = _mapper.Map<Help>(updateHelpDto);
+            await _helpRepository.UpdateHelp(IdentityUserId, help); 
+
         }
+
+        
     }
 }

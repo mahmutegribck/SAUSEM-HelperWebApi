@@ -13,8 +13,6 @@ namespace Helper.Business.Answers.Dtos
 
         public DateTime AnswerDate { get; set; }
 
-        //public Help Help { get; set; }
-
-        public int HelpId { get; set; }
+       
     }
 }
