@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "RPWX4IIWyy7Ey9BuNn7U5qTxEhSKevo+v+/3Ge0UU+SkMfFlXZVRbTSbAHKKNAhBfOp3ATfl0+TWHhOmhO3k+g==",
+  "dgSpecHash": "wdXm7+4SsJR26KUq5xgOAoiUdRhzIBFtED4kXbxNpuafjpxM8MwewJO3B5QineyyNmsyHC/2+CxBFerDYoVGCw==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.API\\Helper.API.csproj",
+  "projectFilePath": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.API\\Helper.API.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mahmut\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\Mahmut\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

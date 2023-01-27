@@ -1,4 +1,5 @@
 ﻿using Helper.Business.Auth.Dtos;
+using Helper.Entites.Identity;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -12,6 +13,8 @@ namespace Helper.Business.Auth
         Task<UserManagerResponse> LoginUserAsync(LoginDto model);
 
         Task<UserManagerResponse> ResetPasswordAsync(ResetPasswordDto model);
+
+        Task<UserManagerResponse> DeleteAccount(ApplicationUser user);
 
     }
 }

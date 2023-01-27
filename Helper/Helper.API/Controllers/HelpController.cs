@@ -16,6 +16,7 @@ namespace Helper.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    //[Authorize(Roles ="User")]
     public class HelpController : ControllerBase
     {
         private readonly IHelpService _helpService;
@@ -50,11 +51,11 @@ namespace Helper.API.Controllers
 
 
 
-
         [HttpGet]
         [Route("[action]")]
         public async Task<IActionResult> GetAllUserHelps()
         {
+           
             var user = await _userManager.GetUserAsync(User);
             var helps = await _helpService.GetAllUserHelps(user.Id);
 

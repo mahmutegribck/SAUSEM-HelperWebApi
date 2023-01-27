@@ -6409,11 +6409,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Business\\Helper.Business.csproj",
+      "projectUniqueName": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.Business\\Helper.Business.csproj",
       "projectName": "Helper.Business",
-      "projectPath": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Business\\Helper.Business.csproj",
+      "projectPath": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.Business\\Helper.Business.csproj",
       "packagesPath": "C:\\Users\\Mahmut\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Business\\obj\\",
+      "outputPath": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.Business\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -6434,11 +6434,11 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj": {
-              "projectPath": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj"
+            "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj": {
+              "projectPath": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj"
             },
-            "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Entites\\Helper.Entites.csproj": {
-              "projectPath": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Entites\\Helper.Entites.csproj"
+            "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.Entites\\Helper.Entites.csproj": {
+              "projectPath": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.Entites\\Helper.Entites.csproj"
             }
           }
         }

@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Business\\Helper.Business.csproj": {}
+    "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.Business\\Helper.Business.csproj": {}
   },
   "projects": {
-    "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Business\\Helper.Business.csproj": {
+    "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.Business\\Helper.Business.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Business\\Helper.Business.csproj",
+        "projectUniqueName": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.Business\\Helper.Business.csproj",
         "projectName": "Helper.Business",
-        "projectPath": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Business\\Helper.Business.csproj",
+        "projectPath": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.Business\\Helper.Business.csproj",
         "packagesPath": "C:\\Users\\Mahmut\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Business\\obj\\",
+        "outputPath": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.Business\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -32,11 +32,11 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj": {
-                "projectPath": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj"
+              "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj": {
+                "projectPath": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj"
               },
-              "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Entites\\Helper.Entites.csproj": {
-                "projectPath": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Entites\\Helper.Entites.csproj"
+              "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.Entites\\Helper.Entites.csproj": {
+                "projectPath": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.Entites\\Helper.Entites.csproj"
               }
             }
           }
@@ -80,14 +80,14 @@
         }
       }
     },
-    "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj": {
+    "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj",
+        "projectUniqueName": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj",
         "projectName": "Helper.DataAccess",
-        "projectPath": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj",
+        "projectPath": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj",
         "packagesPath": "C:\\Users\\Mahmut\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.DataAccess\\obj\\",
+        "outputPath": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.DataAccess\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -108,8 +108,8 @@
           "netcoreapp3.1": {
             "targetAlias": "netcoreapp3.1",
             "projectReferences": {
-              "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Entites\\Helper.Entites.csproj": {
-                "projectPath": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Entites\\Helper.Entites.csproj"
+              "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.Entites\\Helper.Entites.csproj": {
+                "projectPath": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.Entites\\Helper.Entites.csproj"
               }
             }
           }
@@ -163,14 +163,14 @@
         }
       }
     },
-    "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Entites\\Helper.Entites.csproj": {
+    "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.Entites\\Helper.Entites.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Entites\\Helper.Entites.csproj",
+        "projectUniqueName": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.Entites\\Helper.Entites.csproj",
         "projectName": "Helper.Entites",
-        "projectPath": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Entites\\Helper.Entites.csproj",
+        "projectPath": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.Entites\\Helper.Entites.csproj",
         "packagesPath": "C:\\Users\\Mahmut\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Entites\\obj\\",
+        "outputPath": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.Entites\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

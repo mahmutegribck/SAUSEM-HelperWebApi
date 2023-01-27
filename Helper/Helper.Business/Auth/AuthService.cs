@@ -33,7 +33,27 @@ namespace Helper.Business.Auth
             _jwtsecurity = jwtsecurity;      
             _mapper = mapper;
         }
-  
+
+        public async Task<UserManagerResponse> DeleteAccount(ApplicationUser user)
+        {
+            await _userManager.RemoveFromRoleAsync(user, "User");
+            IdentityResult ıdentityResult = await _userManager.DeleteAsync(user);
+            if(ıdentityResult.Succeeded)
+            {
+                return new UserManagerResponse
+                {
+                    Message = "Hesap Silinmiştir",
+                    IsSuccess = true,
+                };
+            }
+            return new UserManagerResponse
+            {
+                Message = "Hesap Silinemedi",
+                IsSuccess = false,
+            };
+
+
+        }
 
         public async Task<UserManagerResponse> LoginUserAsync(LoginDto model)
         {

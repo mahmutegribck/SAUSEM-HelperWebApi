@@ -79,8 +79,9 @@ namespace Helper.API
                 //options.SignIn.RequireConfirmedEmail = false;
                 options.User.AllowedUserNameCharacters = "abcçdefgðhiýjklmnoöpqrsþtuüvwxyzABCÇDEFGÐHIÝJKLMNOÖPQRSÞTUÜVWXYZ0123456789 ";
             })
-                .AddEntityFrameworkStores<HelperDbContext>();
-         
+                .AddEntityFrameworkStores<HelperDbContext>()
+                .AddDefaultTokenProviders();
+
             services.AddAuthentication(auth =>
             {
                 auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
