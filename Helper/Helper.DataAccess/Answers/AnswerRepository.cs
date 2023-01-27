@@ -38,7 +38,7 @@ namespace Helper.DataAccess.Answers
 
         public async Task<List<Answer>> GetAllUserAnswers(string id)
         {
-            var userAnswers =  await _helperDbContext.Answers.Where(a => a.IdentityUser.Id == id).OrderByDescending(a => a.AnswerDate).ToListAsync();
+            var userAnswers =  await _helperDbContext.Answers.Where(a => a.ApplicationUser.Id == id).OrderByDescending(a => a.AnswerDate).ToListAsync();
 
             if(userAnswers.Count > 0 ) 
             {
@@ -79,7 +79,7 @@ namespace Helper.DataAccess.Answers
 
             if (deleteAnswer != null)
             {
-                if (deleteAnswer.IdentityUserId == IdentityUserId)
+                if (deleteAnswer.ApplicationUserId == IdentityUserId)
                 {
                     _helperDbContext.Answers.Remove(deleteAnswer);
                     await _helperDbContext.SaveChangesAsync();
@@ -123,7 +123,7 @@ namespace Helper.DataAccess.Answers
 
             if (answerUpdate != null)
             {
-                if (answerUpdate.IdentityUserId == IdentityUserId)
+                if (answerUpdate.ApplicationUserId == IdentityUserId)
                 {
                     _helperDbContext.Answers.Update(answerUpdate);
                     await _helperDbContext.SaveChangesAsync();

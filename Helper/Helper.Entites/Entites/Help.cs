@@ -4,6 +4,7 @@ using System.ComponentModel.DataAnnotations.Schema;
 using System.ComponentModel.DataAnnotations;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
+using Helper.Entites.Identity;
 
 namespace Helper.Entites.Entites
 {
@@ -33,9 +34,9 @@ namespace Helper.Entites.Entites
         [Required]
         public DateTime HelpDate { get; set; }
 
-        public IdentityUser IdentityUser { get; set; }
+        public ApplicationUser ApplicationUser { get; set; }
 
-        public string IdentityUserId { get; set; }
+        public string ApplicationUserId { get; set; }
 
         public ICollection<Answer> Answer { get; set; }
 

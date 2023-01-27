@@ -1,5 +1,6 @@
 ﻿using Helper.Business.Answers;
 using Helper.Business.Answers.Dtos;
+using Helper.Entites.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -14,8 +15,8 @@ namespace Helper.API.Controllers
     {
 
         private readonly IAnswerService _answerService;
-        private readonly UserManager<IdentityUser> _userManager;
-        public AnswersController(IAnswerService answerService, UserManager<IdentityUser> userManager)
+        private readonly UserManager<ApplicationUser> _userManager;
+        public AnswersController(IAnswerService answerService, UserManager<ApplicationUser> userManager)
         {
             _answerService = answerService;
             _userManager = userManager;

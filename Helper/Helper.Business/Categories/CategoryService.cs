@@ -4,6 +4,7 @@ using Helper.Business.Categories.Dtos;
 using Helper.DataAccess.Answers;
 using Helper.DataAccess.Categories;
 using Helper.Entites.Entites;
+using Helper.Entites.Identity;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -17,9 +18,9 @@ namespace Helper.Business.Categories
     {
         private readonly IMapper _mapper;
         private readonly ICategoryRepository _categoryRepository;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public CategoryService(IMapper mapper, ICategoryRepository categoryRepository, UserManager<IdentityUser> userManager)
+        public CategoryService(IMapper mapper, ICategoryRepository categoryRepository, UserManager<ApplicationUser> userManager)
         {
             _mapper = mapper;
             _categoryRepository = categoryRepository;

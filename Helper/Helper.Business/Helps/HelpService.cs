@@ -27,7 +27,7 @@ namespace Helper.Business.Helps
         {
 
             Help help = _mapper.Map<Help>(createHelpDto);
-            help.IdentityUserId = IdentityUserId;
+            help.ApplicationUserId = IdentityUserId;
             await _helpRepository.CreateHelp(help);
 
 

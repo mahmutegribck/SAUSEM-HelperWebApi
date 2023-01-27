@@ -1,5 +1,8 @@
-﻿using Helper.Business.Auth.Dtos;
+﻿using AutoMapper;
+using Helper.Business.Answers.Dtos;
+using Helper.Business.Auth.Dtos;
 using Helper.Business.Security;
+using Helper.Business.Security.Dtos;
 using Helper.Entites;
 using Helper.Entites.Entites;
 using Helper.Entites.Identity;
@@ -19,21 +22,17 @@ namespace Helper.Business.Auth
 {
     public class AuthService : IAuthService
     {
-        private readonly UserManager<IdentityUser> _userManager;
-        private readonly ISecurityService _jwtsecurity;
-        private readonly IConfiguration _configuration;
-        
+        private readonly UserManager<ApplicationUser> _userManager;
+        private readonly RoleManager<ApplicationRole> _roleManager;
+        private readonly ISecurityService _jwtsecurity;       
+        private readonly IMapper _mapper;
 
-        public AuthService(UserManager<IdentityUser> userManager,  ISecurityService jwtsecurity, IConfiguration configuration)
+        public AuthService(UserManager<ApplicationUser> userManager,  ISecurityService jwtsecurity, IMapper mapper)
         {
             _userManager = userManager;
-            _jwtsecurity = jwtsecurity;
-            _configuration = configuration;
-    
-
+            _jwtsecurity = jwtsecurity;      
+            _mapper = mapper;
         }
-
-  
   
 
         public async Task<UserManagerResponse> LoginUserAsync(LoginDto model)
@@ -56,21 +55,15 @@ namespace Helper.Business.Auth
                         Message = ErrorMsg.InvalidPassword,
                         IsSuccess = false,
                     };
-                var claims = new[]
-                {
-                    new Claim("Email", model.Email),
-                    new Claim(ClaimTypes.NameIdentifier, user.Id),
-                };
-
-
-                _jwtsecurity.SecureToken(claims, out JwtSecurityToken token, out string tokenAstring);
-
+               
+                Token token = _jwtsecurity.CreateAccessToken(60);
 
                 return new UserManagerResponse
                 {
-                    Message = tokenAstring,
+                    Token = token,
+                    Message = "Giriş İşlemi Başarılı",
                     IsSuccess = true,
-                    ExpireDate = token.ValidTo
+                    ExpireDate = token.Expiration
                 };
             }
             catch (Exception)
@@ -95,20 +88,18 @@ namespace Helper.Business.Auth
                         IsSuccess = false,
                     };
 
-                var identityUser = new IdentityUser
-                {
-                    Email = model.Email,
-                    UserName = model.FullName
-                };
+                ApplicationUser newUser = _mapper.Map<ApplicationUser>(model);
+                newUser.Id = Guid.NewGuid().ToString();
+                newUser.UserName = newUser.Name + " " + newUser.Surname;
 
-                var result = await _userManager.CreateAsync(identityUser, model.Password);
+                //ApplicationRole role = await _roleManager.FindByNameAsync("User");
+                
+
+                var result = await _userManager.CreateAsync(newUser, model.Password);
+                
                 if (result.Succeeded)
                 {
-                    var confirmedEmailToken = await _userManager.GenerateEmailConfirmationTokenAsync(identityUser);
-                    var encodeEmailToken = Encoding.UTF8.GetBytes(confirmedEmailToken);
-                    var validEmailToken = WebEncoders.Base64UrlEncode(encodeEmailToken);
-
-                   
+                    await _userManager.AddToRoleAsync(newUser, "User");
                     return new UserManagerResponse
                     {
                         Message = Msg.UserCreated,
@@ -173,12 +164,6 @@ namespace Helper.Business.Auth
 
                 throw;
             }
-            
-
-            
-
-          
-
            
         }
     }

@@ -8,3 +8,13 @@ C:\Users\Mahmut\Desktop\Helper\Helper.Entites\obj\Debug\netcoreapp3.1\Helper.Ent
 C:\Users\Mahmut\Desktop\Helper\Helper.Entites\obj\Debug\netcoreapp3.1\Helper.Entites.csproj.CoreCompileInputs.cache
 C:\Users\Mahmut\Desktop\Helper\Helper.Entites\obj\Debug\netcoreapp3.1\Helper.Entites.dll
 C:\Users\Mahmut\Desktop\Helper\Helper.Entites\obj\Debug\netcoreapp3.1\Helper.Entites.pdb
+C:\Users\Mahmut\Desktop\Deneme\Helper\Helper.Entites\bin\Debug\netcoreapp3.1\Helper.Entites.deps.json
+C:\Users\Mahmut\Desktop\Deneme\Helper\Helper.Entites\bin\Debug\netcoreapp3.1\Helper.Entites.dll
+C:\Users\Mahmut\Desktop\Deneme\Helper\Helper.Entites\bin\Debug\netcoreapp3.1\Helper.Entites.pdb
+C:\Users\Mahmut\Desktop\Deneme\Helper\Helper.Entites\obj\Debug\netcoreapp3.1\Helper.Entites.csproj.AssemblyReference.cache
+C:\Users\Mahmut\Desktop\Deneme\Helper\Helper.Entites\obj\Debug\netcoreapp3.1\Helper.Entites.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\Mahmut\Desktop\Deneme\Helper\Helper.Entites\obj\Debug\netcoreapp3.1\Helper.Entites.AssemblyInfoInputs.cache
+C:\Users\Mahmut\Desktop\Deneme\Helper\Helper.Entites\obj\Debug\netcoreapp3.1\Helper.Entites.AssemblyInfo.cs
+C:\Users\Mahmut\Desktop\Deneme\Helper\Helper.Entites\obj\Debug\netcoreapp3.1\Helper.Entites.csproj.CoreCompileInputs.cache
+C:\Users\Mahmut\Desktop\Deneme\Helper\Helper.Entites\obj\Debug\netcoreapp3.1\Helper.Entites.dll
+C:\Users\Mahmut\Desktop\Deneme\Helper\Helper.Entites\obj\Debug\netcoreapp3.1\Helper.Entites.pdb

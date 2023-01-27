@@ -6880,11 +6880,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.API\\Helper.API.csproj",
+      "projectUniqueName": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.API\\Helper.API.csproj",
       "projectName": "Helper.API",
-      "projectPath": "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.API\\Helper.API.csproj",
+      "projectPath": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.API\\Helper.API.csproj",
       "packagesPath": "C:\\Users\\Mahmut\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.API\\obj\\",
+      "outputPath": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.API\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -6905,8 +6905,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.Business\\Helper.Business.csproj": {
-              "projectPath": "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.Business\\Helper.Business.csproj"
+            "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Business\\Helper.Business.csproj": {
+              "projectPath": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Business\\Helper.Business.csproj"
             }
           }
         }

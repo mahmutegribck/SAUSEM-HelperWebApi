@@ -35,7 +35,6 @@ namespace Helper.API
         {
             Configuration = configuration;
         }
-
         public IConfiguration Configuration { get; }
 
         // This method gets called by the runtime. Use this method to add services to the container.
@@ -61,26 +60,18 @@ namespace Helper.API
             services.AddScoped<ICategoryRepository, CategoryRepository>();
             
 
-
-
             services.AddDbContext<HelperDbContext>(options =>
             options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
 
-            services.AddIdentity<IdentityUser, IdentityRole>(options =>
+            services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {
-                options.Password.RequireDigit = true;
-                options.Password.RequireLowercase = true;
-                options.Password.RequiredLength = 6;
-                options.User.RequireUniqueEmail = true;
-                options.Lockout.AllowedForNewUsers = false;
-
-
-                //options.Password.RequireNonAlphanumeric = false;
-                //options.Password.RequiredUniqueChars = 0;
+                options.Password.RequiredLength = 3;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
                 options.Password.RequireUppercase = false;
-
-
-
+                options.User.RequireUniqueEmail = false;
+                options.Lockout.AllowedForNewUsers = false;
                 //options.Lockout.MaxFailedAccessAttempts = 5;
                 //// yeni kullanýcý oto. kilitlensin mi ? 
                 //options.Lockout.AllowedForNewUsers = false;
@@ -88,38 +79,28 @@ namespace Helper.API
                 //options.SignIn.RequireConfirmedEmail = false;
                 options.User.AllowedUserNameCharacters = "abcçdefgðhiýjklmnoöpqrsþtuüvwxyzABCÇDEFGÐHIÝJKLMNOÖPQRSÞTUÜVWXYZ0123456789 ";
             })
-                .AddEntityFrameworkStores<HelperDbContext>()
-                .AddDefaultTokenProviders();
-
-            //services.ConfigureApplicationCookie(options =>
-            //{
-            //    options.Cookie.Name = "member_cookie";
-            //    options.Cookie.HttpOnly = true;
-            //    options.ExpireTimeSpan = TimeSpan.FromMinutes(90);
-            //    options.ReturnUrlParameter = CookieAuthenticationDefaults.ReturnUrlParameter;
-            //    options.SlidingExpiration = true;
-            //});
-            //services.AddSession();
-
-            //services.AddDistributedMemoryCache();
-
+                .AddEntityFrameworkStores<HelperDbContext>();
+         
             services.AddAuthentication(auth =>
             {
                 auth.DefaultAuthenticateScheme = JwtBearerDefaults.AuthenticationScheme;
-                auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
+                //auth.DefaultChallengeScheme = JwtBearerDefaults.AuthenticationScheme;
                 //auth.DefaultScheme = JwtBearerDefaults.AuthenticationScheme;
             }).AddJwtBearer(options =>
-            {   //options.SaveToken = true;
-                // options.RequireHttpsMetadata = false;
+            {
                 options.TokenValidationParameters = new Microsoft.IdentityModel.Tokens.TokenValidationParameters
                 {
                     ValidateIssuer = true,
                     ValidateAudience = true,
+                    ValidateLifetime= true,
+                    ValidateIssuerSigningKey = true,
+
                     ValidAudience = Configuration["Authentication:Audience"],
                     ValidIssuer = Configuration["Authentication:Issuer"],
-                    RequireExpirationTime = true,
+
                     IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(Configuration["Authentication:Key"])),
-                    ValidateIssuerSigningKey = true,
+                    LifetimeValidator = (notBefore, expires, securityToken, validationParameters) => expires != null ? expires > DateTime.UtcNow : false
+                    
                 };
             });
 
@@ -129,8 +110,7 @@ namespace Helper.API
                 swagger.SwaggerDoc("v1", new OpenApiInfo
                 {
                     Version = "v1",
-                    Title = "Helper API"
-                   
+                    Title = "Helper API"                   
                 });
                 // To Enable authorization using Swagger (JWT)
                 swagger.AddSecurityDefinition("Bearer", new OpenApiSecurityScheme
@@ -140,12 +120,10 @@ namespace Helper.API
                     Name = "Authorization",
                     Type = SecuritySchemeType.Http,
                     BearerFormat = "JWT",
-                    Scheme = "bearer"
-                    
-                    
-                    
+                    Scheme = "bearer"                                    
                 });
             });
+
             services.AddSwaggerGen(w => w.AddSecurityRequirement(
                 new OpenApiSecurityRequirement
                 {
@@ -161,11 +139,10 @@ namespace Helper.API
                         new string[]{}
                     }
                 }));
-
             services.AddControllers();
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+      
         public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
         {
             if (env.IsDevelopment())
@@ -174,23 +151,15 @@ namespace Helper.API
             }
 
             app.UseHttpsRedirection();
-
-
-            //app.UseOpenApi();
-            //app.UseSwaggerUi3();
-            //app.UseIdentity();
             app.UseSwagger();
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API v1");
 
             });
-
             
-            app.UseRouting();
-             
-            app.UseAuthentication();
-            
+            app.UseRouting();             
+            app.UseAuthentication();         
             app.UseAuthorization();
 
             app.UseEndpoints(endpoints =>

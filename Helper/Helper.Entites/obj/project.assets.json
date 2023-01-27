@@ -1023,11 +1023,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.Entites\\Helper.Entites.csproj",
+      "projectUniqueName": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Entites\\Helper.Entites.csproj",
       "projectName": "Helper.Entites",
-      "projectPath": "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.Entites\\Helper.Entites.csproj",
+      "projectPath": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Entites\\Helper.Entites.csproj",
       "packagesPath": "C:\\Users\\Mahmut\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.Entites\\obj\\",
+      "outputPath": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Entites\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"

@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "lIyz+9vVRMHjBmjAjudbLU3t2OPXv55hXCoKU+b+WHdCwB8uQ4FlycVqYo7irFQo2V1JoXGkC4E8ztTScfJmBQ==",
+  "dgSpecHash": "BoKdOFmgRdHUYR31DPgZQiKy7IhO8C4YWXUXopFSE/RZhKle/58Er4pVnuSgAvm2wO3lajZEsI+JQes7qQAgCA==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.Business\\Helper.Business.csproj",
+  "projectFilePath": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.Business\\Helper.Business.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mahmut\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\Mahmut\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

@@ -5,7 +5,7 @@ using System.Text;
 
 namespace Helper.Entites.Identity
 {
-    public class ApplicationRole 
+    public class ApplicationRole : IdentityRole<string>
     {
     }
 }

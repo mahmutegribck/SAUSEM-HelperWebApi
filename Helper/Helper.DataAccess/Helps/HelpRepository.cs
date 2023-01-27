@@ -30,7 +30,7 @@ namespace Helper.DataAccess.Helps
 
             if (deleteHelp != null)
             {
-                if(deleteHelp.IdentityUserId ==IdentityUserId)
+                if(deleteHelp.ApplicationUserId ==IdentityUserId)
                 {
                     _helperDbContext.Helps.Remove(deleteHelp);
                     await _helperDbContext.SaveChangesAsync();
@@ -65,7 +65,7 @@ namespace Helper.DataAccess.Helps
 
         public async Task<List<Help>> GetAllUserHelps(string id)
         {
-            var userHelps = await _helperDbContext.Helps.Where(h => h.IdentityUser.Id == id).OrderByDescending(h => h.HelpDate).ToListAsync();
+            var userHelps = await _helperDbContext.Helps.Where(h => h.ApplicationUser.Id == id).OrderByDescending(h => h.HelpDate).ToListAsync();
 
             if (userHelps.Count > 0)
             {
@@ -97,7 +97,7 @@ namespace Helper.DataAccess.Helps
 
             if(helpUpdate != null )
             {
-                if(helpUpdate.IdentityUserId == IdentityUserId)
+                if(helpUpdate.ApplicationUserId == IdentityUserId)
                 {
                     _helperDbContext.Helps.Update(help);
                     await _helperDbContext.SaveChangesAsync();

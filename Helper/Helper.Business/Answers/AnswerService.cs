@@ -3,6 +3,7 @@ using Helper.Business.Answers.Dtos;
 using Helper.Business.Helps.Dtos;
 using Helper.DataAccess.Answers;
 using Helper.Entites.Entites;
+using Helper.Entites.Identity;
 using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,9 @@ namespace Helper.Business.Answers
     {
         private readonly IMapper _mapper;
         private readonly IAnswerRepository _answerRepository;
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
-        public AnswerService(IMapper mapper, IAnswerRepository answerRepository, UserManager<IdentityUser> userManager)
+        public AnswerService(IMapper mapper, IAnswerRepository answerRepository, UserManager<ApplicationUser> userManager)
         {
             _mapper = mapper;
             _answerRepository = answerRepository;
@@ -29,7 +30,7 @@ namespace Helper.Business.Answers
         {
 
             Answer answer = _mapper.Map<Answer>(createAnswerDto);
-            answer.IdentityUserId = IdentityUserId;
+            answer.ApplicationUserId = IdentityUserId;
             await _answerRepository.CreateAnswer(answer);
 
             //await Task.CompletedTask;

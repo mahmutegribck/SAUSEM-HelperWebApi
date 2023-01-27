@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "sbH+FQxYSfXza7cNoEri5uUxg1OoxwjbMAwUczACfGIPT11alCNjmAWRVNAx3cpiBpHd1BNvMsWve0Qcauj9QA==",
+  "dgSpecHash": "48dSjpHF5mBrwIvfnn19nOWcS53x5RVPyWU645aKT+XRDCv6am7Hw6Qv73l4bqC+1jxRoCR+f/ILM2jvqBtWPg==",
   "success": true,
-  "projectFilePath": "C:\\Users\\Mahmut\\Desktop\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj",
+  "projectFilePath": "C:\\Users\\Mahmut\\Desktop\\Deneme\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj",
   "expectedPackageFiles": [
     "C:\\Users\\Mahmut\\.nuget\\packages\\automapper\\12.0.0\\automapper.12.0.0.nupkg.sha512",
     "C:\\Users\\Mahmut\\.nuget\\packages\\automapper.extensions.microsoft.dependencyinjection\\12.0.0\\automapper.extensions.microsoft.dependencyinjection.12.0.0.nupkg.sha512",

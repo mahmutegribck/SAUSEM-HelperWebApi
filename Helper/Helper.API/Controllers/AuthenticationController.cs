@@ -2,6 +2,7 @@
 using Helper.Business.Auth.Dtos;
 using Helper.Entites;
 using Helper.Entites.Entites;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
@@ -12,15 +13,16 @@ namespace Helper.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [AllowAnonymous]
     public class AuthenticationController : ControllerBase
     {
         private readonly IAuthService _authService;
-        private readonly IConfiguration _configuration;
 
-        public AuthenticationController(IAuthService authService, IConfiguration configuration)
+
+        public AuthenticationController(IAuthService authService)
         {
             _authService = authService;
-            _configuration = configuration;
+
         }
 
         [HttpPost("Register")]
@@ -41,29 +43,23 @@ namespace Helper.API.Controllers
         [HttpPost("Login")]
         public async Task<IActionResult> LoginAsync([FromBody] LoginDto model)
         {
-            try
+            if (ModelState.IsValid)
             {
-                if (ModelState.IsValid)
+                var result = await _authService.LoginUserAsync(model);
+
+                if (result.IsSuccess)
                 {
-                    var result = await _authService.LoginUserAsync(model);
-
-                    if (result.IsSuccess)
-                    {
-                        return Ok(result);
-                    }
-
-                    return BadRequest(result);
+                    return Ok(result);
                 }
-                return BadRequest(ErrorMsg.InvalidProperties);
-            }
-            catch (Exception)
-            {
 
-                throw;
+                return BadRequest(result);
             }
+            return BadRequest(ErrorMsg.InvalidProperties);
+
         }
 
         [HttpPost("ResetPassword")]
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> ResetPassword([FromForm] ResetPasswordDto model)
         {
             if (ModelState.IsValid)

@@ -3,6 +3,7 @@ using Helper.Business.Helps;
 using Helper.Business.Helps.Dtos;
 using Helper.Business.Users;
 using Helper.Entites.Entites;
+using Helper.Entites.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -20,10 +21,10 @@ namespace Helper.API.Controllers
         private readonly IHelpService _helpService;
         private readonly IUserService _userService;
 
-        private readonly UserManager<IdentityUser> _userManager;
+        private readonly UserManager<ApplicationUser> _userManager;
 
 
-        public HelpController(IHelpService helpService, IUserService userService, UserManager<IdentityUser> userManager)
+        public HelpController(IHelpService helpService, IUserService userService, UserManager<ApplicationUser> userManager)
         {
             _helpService = helpService;
             _userService = userService;
