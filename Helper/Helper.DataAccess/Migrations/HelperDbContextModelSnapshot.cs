@@ -283,13 +283,16 @@ namespace Helper.DataAccess.Migrations
                         {
                             Id = "b74ddd14-6340-4840-95c2-db12554843e5",
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "3422c2ac-3355-489e-b341-fc004a2c8c63",
+                            ConcurrencyStamp = "b1fc2342-4222-47f4-bdfb-c52fdb6f8dd4",
                             Email = "admin@gmail.com",
                             EmailConfirmed = false,
                             LockoutEnabled = false,
                             Name = "Admin",
-                            PasswordHash = "AQAAAAEAACcQAAAAEJtODi/AZOI1AyH2z7sGwGcExTWn9N/0+BGuBvbhT4iHPobI6EnaMYex+QPYKUPzYA==",
+                            NormalizedEmail = "ADMIN@GMAIL.COM",
+                            NormalizedUserName = "ADMIN",
+                            PasswordHash = "AQAAAAEAACcQAAAAENLVnmy9x4H1au+wejO90wVVqM0iaxV40uy/hCYZEgMYfqMQynpBRfvkPQanRYngqw==",
                             PhoneNumberConfirmed = false,
+                            SecurityStamp = "d5129dbe-37d2-41ff-a284-a3b20fc806c6",
                             Surname = "Admin",
                             TwoFactorEnabled = false,
                             UserName = "Admin"

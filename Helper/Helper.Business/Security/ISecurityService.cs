@@ -1,16 +1,16 @@
 ﻿using Helper.Business.Security.Dtos;
+using Helper.Entites.Identity;
 using System;
 using System.Collections.Generic;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Helper.Business.Security
 {
     public interface ISecurityService
-    {
-        //void SecureToken(Claim[] claims, out JwtSecurityToken token, out string tokenAstring);
-        Token CreateAccessToken(int minute);
-        
+    {    
+        Task<Token> CreateAccessToken(ApplicationUser user);
     }
 }

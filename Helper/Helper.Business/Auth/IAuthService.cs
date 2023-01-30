@@ -1,5 +1,5 @@
 ﻿using Helper.Business.Auth.Dtos;
-using Helper.Entites.Identity;
+using Helper.Business.Auth.ResponseModel;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -9,12 +9,10 @@ namespace Helper.Business.Auth
 {
     public interface IAuthService
     {
-        Task<UserManagerResponse> RegisterUserAsync(RegisterDto model);
-        Task<UserManagerResponse> LoginUserAsync(LoginDto model);
+        Task<RegisterResponse> RegisterUserAsync(RegisterDto model);
+        Task<LoginResponse> LoginUserAsync(LoginDto model);
 
-        Task<UserManagerResponse> ResetPasswordAsync(ResetPasswordDto model);
-
-        Task<UserManagerResponse> DeleteAccount(ApplicationUser user);
+        Task<LoginResponse> ResetPasswordAsync(ResetPasswordDto model);
 
     }
 }

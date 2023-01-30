@@ -1,6 +1,7 @@
 ﻿using Helper.Business.Answers.Dtos;
 using Helper.Business.Categories;
 using Helper.Business.Categories.Dtos;
+using Helper.Entites;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -10,9 +11,9 @@ namespace Helper.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
+    [Authorize(Roles = "Admin")]
     public class CategoryController : ControllerBase
     {
-       
         private readonly ICategoryService _categoryService;
 
         public CategoryController(ICategoryService categoryService)
@@ -22,15 +23,11 @@ namespace Helper.API.Controllers
 
         [HttpGet]
         [Route("[action]")]
-        
         public async Task<IActionResult> GetAllCategories()
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            //var categories = await _categoryService.GetAllCategories();
 
-            var categories = await _categoryService.GetAllCategories();
-
-            return Ok(categories);
+            return Ok(await _categoryService.GetAllCategories());
         }
 
         [HttpGet]
@@ -48,14 +45,17 @@ namespace Helper.API.Controllers
 
         [HttpPost]
         [Route("[action]")]
-        public async Task<IActionResult> CreateAnswer([FromBody] CreateCategoryDto createCategoryDto)
+        public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryDto createCategoryDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
+            if (ModelState.IsValid)
+            {
+                await _categoryService.CreateCategory(createCategoryDto);
 
-            await _categoryService.CreateCategory(createCategoryDto);
-         
-            return Ok();
+                return Ok();
+
+            }
+            return BadRequest(ErrorMsg.InvalidProperties);
+           
         }
 
         [HttpDelete]

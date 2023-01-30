@@ -45,7 +45,10 @@ namespace Helper.DataAccess
                 Name = "Admin",
                 Surname = "Admin",
                 UserName = "Admin",
-                Email = "admin@gmail.com"
+                Email = "admin@gmail.com",
+                NormalizedEmail = "ADMIN@GMAIL.COM",
+                NormalizedUserName = "ADMIN",
+                SecurityStamp = Guid.NewGuid().ToString()
 
             };
             PasswordHasher<ApplicationUser> passwordHasher = new PasswordHasher<ApplicationUser>();

@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Helper.Business.Answers.Dtos;
 using Helper.Business.Auth.Dtos;
+using Helper.Business.Auth.ResponseModel;
 using Helper.Business.Security;
 using Helper.Business.Security.Dtos;
 using Helper.Entites;
@@ -24,45 +25,25 @@ namespace Helper.Business.Auth
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly RoleManager<ApplicationRole> _roleManager;
-        private readonly ISecurityService _jwtsecurity;       
+        private readonly ISecurityService _jwtsecurity;
         private readonly IMapper _mapper;
 
-        public AuthService(UserManager<ApplicationUser> userManager,  ISecurityService jwtsecurity, IMapper mapper)
+        public AuthService(UserManager<ApplicationUser> userManager, ISecurityService jwtsecurity, IMapper mapper)
         {
             _userManager = userManager;
-            _jwtsecurity = jwtsecurity;      
+            _jwtsecurity = jwtsecurity;
             _mapper = mapper;
         }
 
-        public async Task<UserManagerResponse> DeleteAccount(ApplicationUser user)
-        {
-            await _userManager.RemoveFromRoleAsync(user, "User");
-            IdentityResult ıdentityResult = await _userManager.DeleteAsync(user);
-            if(ıdentityResult.Succeeded)
-            {
-                return new UserManagerResponse
-                {
-                    Message = "Hesap Silinmiştir",
-                    IsSuccess = true,
-                };
-            }
-            return new UserManagerResponse
-            {
-                Message = "Hesap Silinemedi",
-                IsSuccess = false,
-            };
 
-
-        }
-
-        public async Task<UserManagerResponse> LoginUserAsync(LoginDto model)
+        public async Task<LoginResponse> LoginUserAsync(LoginDto model)
         {
             try
             {
                 var user = await _userManager.FindByEmailAsync(model.Email);
                 if (user == null)
                 {
-                    return new UserManagerResponse
+                    return new LoginResponse
                     {
                         Message = ErrorMsg.NoUserEmail,
                         IsSuccess = false,
@@ -70,20 +51,20 @@ namespace Helper.Business.Auth
                 }
                 var result = await _userManager.CheckPasswordAsync(user, model.Password);
                 if (!result)
-                    return new UserManagerResponse
+                    return new LoginResponse
                     {
                         Message = ErrorMsg.InvalidPassword,
                         IsSuccess = false,
                     };
-               
-                Token token = _jwtsecurity.CreateAccessToken(60);
+       
+                Token token = await _jwtsecurity.CreateAccessToken(user);
 
-                return new UserManagerResponse
+                return new LoginResponse
                 {
                     Token = token,
-                    Message = "Giriş İşlemi Başarılı",
+                    Message = Msg.LoginSucces,
                     IsSuccess = true,
-                    ExpireDate = token.Expiration
+                    
                 };
             }
             catch (Exception)
@@ -93,7 +74,7 @@ namespace Helper.Business.Auth
             }
         }
 
-        public async Task<UserManagerResponse> RegisterUserAsync(RegisterDto model)
+        public async Task<RegisterResponse> RegisterUserAsync(RegisterDto model)
         {
             try
             {
@@ -102,7 +83,7 @@ namespace Helper.Business.Auth
                     throw new NullReferenceException(ErrorMsg.NullModel);
                 }
                 if (model.Password != model.ConfirmPassword)
-                    return new UserManagerResponse
+                    return new RegisterResponse
                     {
                         Message = Msg.ConfirmPasswordNotMatch,
                         IsSuccess = false,
@@ -112,26 +93,23 @@ namespace Helper.Business.Auth
                 newUser.Id = Guid.NewGuid().ToString();
                 newUser.UserName = newUser.Name + " " + newUser.Surname;
 
-                //ApplicationRole role = await _roleManager.FindByNameAsync("User");
-                
-
                 var result = await _userManager.CreateAsync(newUser, model.Password);
-                
+
                 if (result.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(newUser, "User");
-                    return new UserManagerResponse
+                    return new RegisterResponse
                     {
                         Message = Msg.UserCreated,
                         IsSuccess = true,
                     };
                 }
 
-                return new UserManagerResponse
+                return new RegisterResponse
                 {
                     Message = ErrorMsg.UserNotCreated,
                     IsSuccess = false,
-                    Errors = result.Errors.Select(e => e.Description)
+                    
                 };
 
             }
@@ -142,20 +120,20 @@ namespace Helper.Business.Auth
             }
         }
 
-        public async Task<UserManagerResponse> ResetPasswordAsync(ResetPasswordDto model)
+        public async Task<LoginResponse> ResetPasswordAsync(ResetPasswordDto model)
         {
             try
             {
                 var user = await _userManager.FindByEmailAsync(model.Email);
                 if (user == null)
-                    return new UserManagerResponse
+                    return new LoginResponse
                     {
                         IsSuccess = false,
                         Message = ErrorMsg.NoUserEmail,
                     };
 
                 if (model.NewPassword != model.ConfirmPassword)
-                    return new UserManagerResponse
+                    return new LoginResponse
                     {
                         IsSuccess = false,
                         Message = ErrorMsg.EmailNotConfirm,
@@ -166,17 +144,16 @@ namespace Helper.Business.Auth
                 var result = await _userManager.ResetPasswordAsync(user, token, model.NewPassword);
 
                 if (result.Succeeded)
-                    return new UserManagerResponse
+                    return new LoginResponse
                     {
                         Message = Msg.ResetPasswordSuccess,
                         IsSuccess = true,
                     };
 
-                return new UserManagerResponse
+                return new LoginResponse
                 {
                     Message = ErrorMsg.GeneralErrorMsg,
-                    IsSuccess = false,
-                    Errors = result.Errors.Select(e => e.Description),
+                    IsSuccess = false
                 };
             }
             catch (Exception)
@@ -184,7 +161,7 @@ namespace Helper.Business.Auth
 
                 throw;
             }
-           
+
         }
     }
 }

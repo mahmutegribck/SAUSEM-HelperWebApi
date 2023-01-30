@@ -10,7 +10,7 @@ namespace Helper.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles ="User")]
+    [Authorize]
     public class AnswersController : ControllerBase
     {
 

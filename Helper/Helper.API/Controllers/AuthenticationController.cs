@@ -2,9 +2,7 @@
 using Helper.Business.Auth.Dtos;
 using Helper.Entites;
 using Helper.Entites.Entites;
-using Helper.Entites.Identity;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Configuration;
 using Newtonsoft.Json.Linq;
@@ -19,13 +17,12 @@ namespace Helper.API.Controllers
     public class AuthenticationController : ControllerBase
     {
         private readonly IAuthService _authService;
-        private readonly UserManager<ApplicationUser> _userManager;
 
 
-        public AuthenticationController(IAuthService authService, UserManager<ApplicationUser> userManager)
+        public AuthenticationController(IAuthService authService)
         {
             _authService = authService;
-            _userManager= userManager;
+
         }
 
         [HttpPost("Register")]
@@ -78,24 +75,5 @@ namespace Helper.API.Controllers
             return BadRequest(ErrorMsg.InvalidProperties);
         }
 
-
-        [HttpDelete]
-        [Route("[action]")]
-        public async Task<IActionResult> DeleteAccount()
-        {
-            if (ModelState.IsValid)
-            {
-                var user = await _userManager.GetUserAsync(User);
-                var result = await _authService.DeleteAccount(user);
-
-                if (result.IsSuccess)
-                    return Ok(result);
-
-                return BadRequest(result);
-            }
-
-            return BadRequest(ErrorMsg.InvalidProperties);
-        }
-        
     }
 }

@@ -6360,11 +6360,11 @@
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj",
+      "projectUniqueName": "C:\\Users\\Mahmut\\Desktop\\SAUSEM\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj",
       "projectName": "Helper.DataAccess",
-      "projectPath": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj",
+      "projectPath": "C:\\Users\\Mahmut\\Desktop\\SAUSEM\\Helper\\Helper.DataAccess\\Helper.DataAccess.csproj",
       "packagesPath": "C:\\Users\\Mahmut\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.DataAccess\\obj\\",
+      "outputPath": "C:\\Users\\Mahmut\\Desktop\\SAUSEM\\Helper\\Helper.DataAccess\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
@@ -6385,8 +6385,8 @@
         "netcoreapp3.1": {
           "targetAlias": "netcoreapp3.1",
           "projectReferences": {
-            "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.Entites\\Helper.Entites.csproj": {
-              "projectPath": "C:\\Users\\Mahmut\\Documents\\GitHub\\SAUSEM\\Helper\\Helper.Entites\\Helper.Entites.csproj"
+            "C:\\Users\\Mahmut\\Desktop\\SAUSEM\\Helper\\Helper.Entites\\Helper.Entites.csproj": {
+              "projectPath": "C:\\Users\\Mahmut\\Desktop\\SAUSEM\\Helper\\Helper.Entites\\Helper.Entites.csproj"
             }
           }
         }
