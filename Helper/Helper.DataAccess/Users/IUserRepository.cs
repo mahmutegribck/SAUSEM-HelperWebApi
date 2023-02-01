@@ -1,4 +1,6 @@
 ﻿using Helper.Entites.Entites;
+using Helper.Entites.Identity;
+using Microsoft.AspNetCore.Identity;
 using System;
 using System.Collections.Generic;
 using System.Text;
@@ -8,11 +10,9 @@ namespace Helper.DataAccess.Users
 {
     public interface IUserRepository
     {
-        Task<List<User>> GetAllUsers();
-        Task<User> GetUserById(int id);
-
-        Task<User> CreateUser(User user);
-        Task<User> UpdateUser(User user);
-        Task DeleteUser(int id);
+        Task<List<ApplicationUser>> GetAllUsers();
+        Task<ApplicationUser> GetUser(string id);
+        Task<IdentityResult> UpdateUser(ApplicationUser user);
+        Task<IdentityResult> DeleteUser(string id);
     }
 }

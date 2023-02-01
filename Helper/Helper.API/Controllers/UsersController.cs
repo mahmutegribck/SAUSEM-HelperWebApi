@@ -19,183 +19,109 @@ using System.Threading.Tasks;
 namespace Helper.Controllers
 {
     [Route("api/[controller]")]
-    [ApiController]//Validation kontrolu yapildi
+    [ApiController]
+    
     public class UsersController : ControllerBase
     {
         private IUserService _userService;
         private UserManager<ApplicationUser> _userManager;
-        private RoleManager<ApplicationRole> _roleManager;
-     
 
-        public UsersController(IUserService userService, UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
+
+        public UsersController(IUserService userService, UserManager<ApplicationUser> userManager)
         {
             _userService = userService;
             _userManager = userManager;
-            _roleManager = roleManager;
-           
+
         }
 
 
-        /// <summary>
-        /// Get All Users
-        /// </summary>
-        /// <returns></returns>
         [HttpGet]
         [Route("[action]")]
-        [Authorize]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetAllUsers()
         {
-            //string userId = User.Claims.First("UserID").Value;
-            //var user0 = await _userManager.FindByIdAsync(userId);
+            var users = await _userService.GetAllUsers();
 
-            var user = await _userService.GetAllUsers();
-
-            if (user.Count == 0)
+            if (users.Count == 0)
             {
-                return NotFound();
+                return NotFound("Kullanıcı Bulunamadı");
             }
             else
             {
-                return Ok(user);
+                return Ok(users);
             }
 
         }
 
-        /// <summary>
-        /// Get User By ID
-        /// </summary>
-        /// <returns></returns>
+
+        [HttpGet]
+        [Route("[action]")]
+        [Authorize(Roles = "Admin,User")]
+        public async Task<IActionResult> GetUser()
+        {
+            var currentUser = await _userManager.GetUserAsync(User);
+            if(currentUser !=null)
+            {
+                var user = await _userService.GetUser(currentUser.Id);
+
+                if (user != null)
+                {
+                    return Ok(user);
+                }
+            }
+            return NotFound("Kullanıcı Bulunamadı");
+
+        }
+
+
         [HttpGet]
         [Route("[action]/{id}")]
-        public async Task<IActionResult> GetUserById(int id)
+        [Authorize(Roles = "Admin")]
+        public async Task<IActionResult> GetUserById(string id)
         {
-            var user = await _userService.GetUserById(id);
-            if (user != null)
+            if(id != null)
             {
-                return Ok(user);
+                var user = await _userService.GetUser(id);
+                if (user != null)
+                {
+                    return Ok(user);
+                }
             }
-            return NotFound();
+            return NotFound("Kullanıcı Bulunamadı");
         }
 
-        /// <summary>
-        /// Create User
-        /// </summary>
-        /// <returns></returns>
-        [HttpPost]
-        [Route("[action]")]
-        public async Task<IActionResult> CreateUser([FromBody] User user)
-        {
-            var createUser = await _userService.CreateUser(user);
-            return CreatedAtAction("GetUserById", new { id = createUser.UserID }, createUser);
-        }
+       
 
-        /// <summary>
-        /// Update User
-        /// </summary>
-        /// <returns></returns>
         [HttpPut]
         [Route("[action]")]
-        public async Task<IActionResult> UpdateUser([FromBody] User user)
+        [Authorize(Roles = "Admin,User")]
+        public async Task<IActionResult> UpdateUser([FromBody] UpdateApplicationUserDto model)
         {
-            ApplicationUser applicationUser = await _userManager.FindByNameAsync(User.Identity.Name);
-            if (await _userService.GetUserById(user.UserID) != null)
+            var currentUser = await _userManager.GetUserAsync(User);
+            var result = await _userService.UpdateUser(currentUser, model);
+            if (result.Succeeded)
             {
-                return Ok(await _userService.UpdateUser(user));
+                return Ok("Bilgiler Başarıyla Güncellendi");
             }
-            return NotFound();
+            return NotFound("Bilgiler Güncellenemedi");
         }
 
-        /// <summary>
-        /// Delete User
-        /// </summary>
-        /// <returns></returns>
+
+
         [HttpDelete]
-        [Route("[action]/{id}")]
-        public async Task<IActionResult> DeleteUser(int id)
+        [Route("[action]")]
+        [Authorize(Roles = "User")]
+        public async Task<IActionResult> DeleteUser()
         {
-            if (await _userService.GetUserById(id) != null)
+            var currentUser = await _userManager.GetUserAsync(User);
+
+            var result = await _userService.DeleteUser(currentUser.Id);
+            if (result.Succeeded)
             {
-                await _userService.DeleteUser(id);
-                return Ok();
+                return Ok("Kulanıcı Başarıyla Silindi");
             }
-            return NotFound();
+            return NotFound("Kulanıcı Silinemedi");
         }
-        //[HttpPost]
-        //[Route("User")]
-        //public async Task<ActionResult> UserCreate([FromBody] UserCreateViewModel model)
-        //{
-        //    if (ModelState.IsValid)
-        //    {
-        //        ApplicationUser user = new ApplicationUser()
-        //        {
-        //            UserName = model.UserName.Trim(),
-        //            Email = model.Email.Trim()
-        //        };
-        //        IdentityResult result = await _userManager.CreateAsync(user, model.Password.Trim());
-        //        if (result.Succeeded)
-        //        {
-        //            if (!_roleManager.RoleExistsAsync("User").Result)
-        //            {
-        //                ApplicationRole role = new ApplicationRole()
-        //                {
-        //                    Name = "User"
-        //                };
-        //                IdentityResult roleResult = await _roleManager.CreateAsync(role);
-        //                if (roleResult.Succeeded)
-        //                {
-        //                    _userManager.AddToRoleAsync(user, "User").Wait();
-        //                }
-        //            }
-        //            _userManager.AddToRoleAsync(user, "User").Wait();
-        //            return Ok();
-        //        }
-        //        String errorMessage = String.Empty;
-        //        foreach (var item in result.Errors)
-        //        {
-        //            errorMessage += item.Description;
-        //        }
-        //        return BadRequest(errorMessage);
-        //    }
-        //    return BadRequest("Bilgilerinizi kontrol ediniz. İstenilen formatta değil");
-        //}
-        //[HttpPost]
-        //[Route("Login")]
-        //public async Task<ActionResult> Login([FromBody] LoginViewModel model)
-        //{
 
-
-
-        //    if (ModelState.IsValid)
-        //    {
-        //        ApplicationUser user = await _userManager.FindByNameAsync(model.UserName.Trim());
-        //        if (user != null && await _userManager.CheckPasswordAsync(user, model.Password.Trim()))
-        //        {
-        //            var claims = new[]
-        //            {
-        //                new Claim(JwtRegisteredClaimNames.Sub,user.UserName),
-        //                new Claim(JwtRegisteredClaimNames.Jti,Guid.NewGuid().ToString())
-        //            };
-
-        //            var signinKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes("MySuperSecureKey"));
-
-        //            var token = new JwtSecurityToken(
-                        
-        //                expires: DateTime.UtcNow.AddHours(1),
-        //                claims: claims,
-        //                signingCredentials: new Microsoft.IdentityModel.Tokens.SigningCredentials(signinKey, SecurityAlgorithms.HmacSha256)
-        //                );
-        //            return Ok(new
-        //            {
-        //                token = new JwtSecurityTokenHandler().WriteToken(token),
-        //                expiration = token.ValidTo
-        //            });
-        //        }
-        //        else
-        //        {
-        //            return BadRequest("Giriş bilgilerinizi kontrol edin hatalı gözüküyor.");
-        //        }
-        //    }
-        //    return BadRequest("Veriler uygun değil");
-        //}
     }
 }

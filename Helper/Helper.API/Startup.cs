@@ -65,7 +65,7 @@ namespace Helper.API
             options.UseSqlServer(Configuration.GetConnectionString("IdentityConnection")));
 
            
-            services.AddIdentityCore<ApplicationUser>(options =>
+            services.AddIdentity<ApplicationUser, ApplicationRole>(options =>
             {
                 options.Password.RequiredLength = 3;
                 options.Password.RequireNonAlphanumeric = false;
@@ -80,8 +80,7 @@ namespace Helper.API
                 //// oturum açmasý için mail onaylý olmasý gerekir
                 //options.SignIn.RequireConfirmedEmail = false;
                 options.User.AllowedUserNameCharacters = "abcçdefgðhiýjklmnoöpqrsþtuüvwxyzABCÇDEFGÐHIÝJKLMNOÖPQRSÞTUÜVWXYZ0123456789 ";
-            }).AddRoles<ApplicationRole>()
-                .AddEntityFrameworkStores<HelperDbContext>().AddDefaultTokenProviders();
+            }) .AddEntityFrameworkStores<HelperDbContext>().AddDefaultTokenProviders();
 
             services.AddAuthentication(auth =>
             {               

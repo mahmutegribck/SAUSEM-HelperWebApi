@@ -1,4 +1,6 @@
 ﻿using Helper.Entites.Entites;
+using Helper.Entites.Identity;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -10,51 +12,38 @@ namespace Helper.DataAccess.Users
 {
     public class UserRepository : IUserRepository
     {
-        public async Task<User> CreateUser(User user)
+        private UserManager<ApplicationUser> _userManager;
+        private RoleManager<ApplicationRole> _roleManager;
+
+        public UserRepository(UserManager<ApplicationUser> userManager, RoleManager<ApplicationRole> roleManager)
         {
-            using (var helperDbContext = new HelperDbContext())
-            {
-                helperDbContext.Users.Add(user);
-                await helperDbContext.SaveChangesAsync();
-                return user;
-            }
+            _userManager = userManager;
+            _roleManager = roleManager;
         }
 
-        public async Task DeleteUser(int id)
+        public async Task<List<ApplicationUser>> GetAllUsers()
         {
-            using (var helperDbContext = new HelperDbContext())
-            {
-                var deleteUser = await GetUserById(id);
-                helperDbContext.Users.Remove(deleteUser);
-                await helperDbContext.SaveChangesAsync();
-            }
+            var role = await _roleManager.FindByNameAsync("User");
+            return (List<ApplicationUser>)await _userManager.GetUsersInRoleAsync(role.Name);
         }
 
-        public async Task<List<User>> GetAllUsers()
+        public async Task<ApplicationUser> GetUser(string id)
         {
-            using (var helperDbContext = new HelperDbContext())
-            {
-                return await helperDbContext.Users.OrderBy(u => u.UserID).ToListAsync();
-            }
+            return await _userManager.FindByIdAsync(id);
         }
 
-        public async Task<User> GetUserById(int id)
+        public async Task<IdentityResult> UpdateUser(ApplicationUser user)
         {
-            using (var helperDbContext = new HelperDbContext())
-            {
-                return await helperDbContext.Users.FindAsync(id);
-            }
+            IdentityResult result = await _userManager.UpdateAsync(user);
+            return result;
         }
 
-        public async Task<User> UpdateUser(User user)
+        public async Task<IdentityResult> DeleteUser(string id)
         {
-            using (var helperDbContext = new HelperDbContext())
-            {
-                helperDbContext.Users.Update(user);
-                await helperDbContext.SaveChangesAsync();
-                return user;
+            var deletedUser = await _userManager.FindByIdAsync(id);
+            IdentityResult result = await _userManager.DeleteAsync(deletedUser);
+            return result;
 
-            }
         }
     }
 }

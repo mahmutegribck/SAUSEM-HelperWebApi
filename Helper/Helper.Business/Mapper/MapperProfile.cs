@@ -3,6 +3,7 @@ using Helper.Business.Answers.Dtos;
 using Helper.Business.Auth.Dtos;
 using Helper.Business.Categories.Dtos;
 using Helper.Business.Helps.Dtos;
+using Helper.Business.Users.Dtos;
 using Helper.Entites.Entites;
 using Helper.Entites.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -30,6 +31,9 @@ namespace Helper.Business.Mapper
             CreateMap<ApplicationUser, LoginDto>().ReverseMap();
             CreateMap<ApplicationUser, RegisterDto>().ReverseMap();
             CreateMap<ApplicationUser, ResetPasswordDto>().ReverseMap();
+            CreateMap<ApplicationUser, UpdateApplicationUserDto>().ReverseMap();
+            CreateMap<ApplicationUser, GetApplicationUserDto>().ReverseMap();
+
         }
     }
 }

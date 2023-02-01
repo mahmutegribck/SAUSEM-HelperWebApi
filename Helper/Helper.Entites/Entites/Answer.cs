@@ -25,7 +25,7 @@ namespace Helper.Entites.Entites
         public DateTime AnswerDate { get; set; }
 
 
-
+        public string AnswerCheck { get; set; }
         public ApplicationUser ApplicationUser { get; set; }
 
         public string ApplicationUserId { get; set; }
