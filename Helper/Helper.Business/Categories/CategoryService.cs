@@ -46,15 +46,8 @@ namespace Helper.Business.Categories
 
         public async Task<GetCategoryDto> GetCategoryById(int id)
         {
-            if (id > 0)
-            {
-                var category = _mapper.Map<GetCategoryDto>(await _categoryRepository.GetCategorypById(id));
-                return category;
-            }
-            else
-            {
-                throw new Exception("Id can not be less than 1");
-            }
+            var category = _mapper.Map<GetCategoryDto>(await _categoryRepository.GetCategorypById(id));
+            return category;
         }
 
         public async Task UpdateCategory(UpdateCategoryDto updateCategoryDto)

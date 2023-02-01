@@ -25,36 +25,38 @@ namespace Helper.API.Controllers
         [Route("[action]")]
         public async Task<IActionResult> GetAllCategories()
         {
-            //var categories = await _categoryService.GetAllCategories();
-
-            return Ok(await _categoryService.GetAllCategories());
+            var categories = await _categoryService.GetAllCategories();
+            if(categories.Count != 0)
+            {
+                return Ok(categories);
+            }
+            return NotFound("Kategori Bulunamadı");
         }
 
         [HttpGet]
         [Route("[action]/{id}")]
         public async Task<IActionResult> GetCategoryById(int id)
-        {
+       {
             var category = await _categoryService.GetCategoryById(id);
             if (category != null)
             {
                 return Ok(category);
             }
-
-            return NotFound();
+            return NotFound("Kategori Bulunamadı");
         }
 
         [HttpPost]
         [Route("[action]")]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryDto createCategoryDto)
         {
-            if (ModelState.IsValid)
+            if (createCategoryDto.CategoryName !=null && createCategoryDto.CategoryName != "")
             {
                 await _categoryService.CreateCategory(createCategoryDto);
 
-                return Ok();
+                return Ok("Kategori Oluşturuldu");
 
             }
-            return BadRequest(ErrorMsg.InvalidProperties);
+            return BadRequest("Kategori Eklenemedi");
            
         }
 
@@ -65,9 +67,9 @@ namespace Helper.API.Controllers
             if (await _categoryService.GetCategoryById(id) != null)
             { 
                 await _categoryService.DeleteCategory(id);
-                return Ok();
+                return Ok("Kategori Silindi");
             }
-            return NotFound();
+            return NotFound("Silinecek Kategori Bulunamadı");
 
         }
 
@@ -75,17 +77,15 @@ namespace Helper.API.Controllers
         [Route("[action]")]
         public async Task<IActionResult> UpdateCategory([FromBody] UpdateCategoryDto updateCategoryDto)
         {
-            if (!ModelState.IsValid)
-                return BadRequest(ModelState);
-
+          
             if (await _categoryService.GetCategoryById(updateCategoryDto.CategoryId) != null)
             {
                 await _categoryService.UpdateCategory(updateCategoryDto);
 
-                return Ok(updateCategoryDto);
+                return Ok("Kategori Güncellendi");
 
             }
-            return BadRequest();
+            return BadRequest("Güncellenecek Kategori Bulunamadı");
         }
     }
 }
