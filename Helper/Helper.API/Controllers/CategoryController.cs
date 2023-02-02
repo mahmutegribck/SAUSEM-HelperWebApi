@@ -11,7 +11,7 @@ namespace Helper.API.Controllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    [Authorize(Roles = "Admin")]
+    
     public class CategoryController : ControllerBase
     {
         private readonly ICategoryService _categoryService;
@@ -23,6 +23,7 @@ namespace Helper.API.Controllers
 
         [HttpGet]
         [Route("[action]")]
+        [Authorize(Roles = "Admin,User")]
         public async Task<IActionResult> GetAllCategories()
         {
             var categories = await _categoryService.GetAllCategories();
@@ -35,6 +36,7 @@ namespace Helper.API.Controllers
 
         [HttpGet]
         [Route("[action]/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> GetCategoryById(int id)
        {
             var category = await _categoryService.GetCategoryById(id);
@@ -47,6 +49,7 @@ namespace Helper.API.Controllers
 
         [HttpPost]
         [Route("[action]")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> CreateCategory([FromBody] CreateCategoryDto createCategoryDto)
         {
             if (createCategoryDto.CategoryName !=null && createCategoryDto.CategoryName != "")
@@ -62,6 +65,7 @@ namespace Helper.API.Controllers
 
         [HttpDelete]
         [Route("[action]/{id}")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> DeleteCategory(int id)
         {
             if (await _categoryService.GetCategoryById(id) != null)
@@ -75,6 +79,7 @@ namespace Helper.API.Controllers
 
         [HttpPut]
         [Route("[action]")]
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> UpdateCategory([FromBody] UpdateCategoryDto updateCategoryDto)
         {
           

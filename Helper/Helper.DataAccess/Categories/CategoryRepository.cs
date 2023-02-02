@@ -44,9 +44,10 @@ namespace Helper.DataAccess.Categories
         public async Task UpdateCategory(Category category)
         {
             var updateCategory = await _helperDbContext.Categories.FindAsync(category.CategoryId);
+
             updateCategory.CategoryName = category.CategoryName;
+
             _helperDbContext.Categories.Update(updateCategory);
-            //_helperDbContext.UpdateRange(category);
             await _helperDbContext.SaveChangesAsync();
            }
     }
