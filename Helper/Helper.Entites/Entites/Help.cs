@@ -5,6 +5,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Text;
 using Microsoft.AspNetCore.Identity;
 using Helper.Entites.Identity;
+using System.ComponentModel;
 
 namespace Helper.Entites.Entites
 {
@@ -16,17 +17,11 @@ namespace Helper.Entites.Entites
         }
 
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Required]
+        [Required] 
         public int HelpId { get; set; }
 
         [Required]
         public string HelpTitle { get; set; }
-
-        //[Required]
-        // public string HelpCategory { get; set; }
-
-        [Required]
-        public string HelpTag { get; set; }
 
         [Required]
         public string HelpText { get; set; }
@@ -34,17 +29,21 @@ namespace Helper.Entites.Entites
         [Required]
         public DateTime HelpDate { get; set; }
 
-        public ApplicationUser ApplicationUser { get; set; }
+        [DefaultValue(false)]
+        [Required]
+        public bool HelpCheck { get; set; }
 
+
+        public ApplicationUser ApplicationUser { get; set; }
         public string ApplicationUserId { get; set; }
+
+
+        public Category Category { get; set; }
+        public int CategoryId { get; set; }
+
 
         public ICollection<Answer> Answer { get; set; }
 
-    
-
-        public Category Category { get; set; }
-
-        public int CategoryId { get; set; }
 
         public ICollection<Tag> Tags { get; set; }
     }

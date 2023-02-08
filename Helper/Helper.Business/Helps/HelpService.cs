@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Helper.Business.Answers.Dtos;
 using Helper.Business.Helps.Dtos;
+using Helper.Business.Users.Dtos;
 using Helper.DataAccess.Helps;
+using Helper.DataAccess.Users;
 using Helper.Entites.Entites;
 using System;
 using System.Collections.Generic;
@@ -14,35 +16,46 @@ namespace Helper.Business.Helps
     public class HelpService : IHelpService
     {
         private readonly IHelpRepository _helpRepository;
+        private readonly IUserRepository _userRepository;
 
         private readonly IMapper _mapper;
 
-        public HelpService(IMapper mapper, IHelpRepository helpRepository)
+        public HelpService(IMapper mapper, IHelpRepository helpRepository, IUserRepository userRepository)
         {
             _helpRepository = helpRepository;
             _mapper = mapper;
+            _userRepository = userRepository;
         }
 
-        public async Task CreateHelp(string IdentityUserId, CreateHelpDto createHelpDto)
-        {
-
-            Help help = _mapper.Map<Help>(createHelpDto);
-            help.ApplicationUserId = IdentityUserId;
-            await _helpRepository.CreateHelp(help);
-
-
-        }
-
-        public async Task DeleteHelp(string IdentityUserId, int id)
-        {
-            await _helpRepository.DeleteHelp(IdentityUserId, id);
-        }
 
         public async Task<List<GetHelpDto>> GetAllHelps()
-        {
+        {     
             var helps = _mapper.Map<List<GetHelpDto>>(await _helpRepository.GetAllHelps());
             return helps.ToList();
-            
+        }
+
+        public async Task<List<GetHelpDto>> GetAllCheckedHelps()
+        {
+            var helps = _mapper.Map<List<GetHelpDto>>(await _helpRepository.GetAllCheckedHelps());
+            return helps.ToList();
+        }
+
+        public async Task<List<GetHelpDto>> GetAllUnCheckedHelps()
+        {
+            var helps = _mapper.Map<List<GetHelpDto>>(await _helpRepository.GetAllUnCheckedHelps());
+            return helps.ToList();
+        }
+
+        public async Task<List<GetHelpDto>> GetAllCheckedUserHelps(string id)
+        {
+            var helps = _mapper.Map<List<GetHelpDto>>(await _helpRepository.GetAllCheckedUserHelps(id));
+            return helps.ToList();
+        }
+
+        public async Task<List<GetHelpDto>> GetAllUnCheckedUserHelps(string id)
+        {
+            var helps = _mapper.Map<List<GetHelpDto>>(await _helpRepository.GetAllUnCheckedUserHelps(id));
+            return helps.ToList();
         }
 
         public async Task<List<GetHelpDto>> GetAllUserHelps(string id)
@@ -51,25 +64,48 @@ namespace Helper.Business.Helps
             return userHelps.ToList();
         }
 
-
         public async Task<GetHelpDto> GetHelpById(int id)
         {
-            if (id > 0)
-            {
-                var userHelp = _mapper.Map<GetHelpDto>(await _helpRepository.GetHelpById(id));  
-                return userHelp;
-            }
-            else
-            {
-                throw new Exception("Id can not be less than 1");
-            }
+            var userHelp = _mapper.Map<GetHelpDto>(await _helpRepository.GetHelpById(id));
+            return userHelp;
         }
 
-        public async Task UpdateHelp(string IdentityUserId, UpdateHelpDto updateHelpDto)
+        public async Task<List<GetHelpDto>> GetHelpsByCategoryId(int id)
+        {
+            var categoryHelps = _mapper.Map<List<GetHelpDto>>(await _helpRepository.GetHelpsByCategoryId(id));
+            return categoryHelps;
+        }
+
+        public async Task<bool> CreateHelp(string IdentityUserId, CreateHelpDto createHelpDto)
+        {
+            Help help = _mapper.Map<Help>(createHelpDto);
+            help.ApplicationUserId = IdentityUserId;
+            help.HelpDate = DateTime.Now;
+            return await _helpRepository.CreateHelp(help);
+        }
+
+        public async Task UpdateHelp(int helpId, string IdentityUserId, UpdateHelpDto updateHelpDto)
         {
             Help help = _mapper.Map<Help>(updateHelpDto);
-            await _helpRepository.UpdateHelp(IdentityUserId, help); 
+            await _helpRepository.UpdateHelp(helpId, IdentityUserId, help);
 
+        }
+
+        public async Task<bool> DeleteHelp(string IdentityUserId, int id)
+        {
+            return await _helpRepository.DeleteHelp(IdentityUserId, id);
+        }
+
+        public async Task SetCheckedHelp(GetHelpDto checkedHelp)
+        {
+            Help help = _mapper.Map<Help>(checkedHelp);
+            await _helpRepository.SetCheckedHelp(help);
+        }
+
+        public async Task SetUnCheckedHelp(GetHelpDto unCheckedHelp)
+        {
+            Help help = _mapper.Map<Help>(unCheckedHelp);
+            await _helpRepository.SetUnCheckedHelp(help);
         }
 
         

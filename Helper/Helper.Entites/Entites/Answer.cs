@@ -11,8 +11,7 @@ namespace Helper.Entites.Entites
 
     public class Answer
     {
-        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
-        [Required]
+        [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]    
         public int AnswerId { get; set; }
 
         [Required]
@@ -24,8 +23,7 @@ namespace Helper.Entites.Entites
         [Required]
         public DateTime AnswerDate { get; set; }
 
-
-        public string AnswerCheck { get; set; }
+        
         public ApplicationUser ApplicationUser { get; set; }
 
         public string ApplicationUserId { get; set; }
