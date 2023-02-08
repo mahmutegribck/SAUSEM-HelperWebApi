@@ -179,12 +179,17 @@ namespace Helper.API.Controllers
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
             {
-                var result = await _helpService.CreateHelp(user.Id, createHelpDto);
-                if (result)
+                var category = await _categoryService.GetCategoryById(createHelpDto.CategoryId);
+                if (category != null)
                 {
-                    return Ok("Başarıyla Oluşturuldu");
+                    var result = await _helpService.CreateHelp(user.Id, createHelpDto);
+                    if (result)
+                    {
+                        return Ok("Başarıyla Oluşturuldu");
+                    }
+                    return BadRequest("Paylaşım Oluşturulamadı");
                 }
-                return BadRequest("Paylaşım Oluşturulamadı");
+                return NotFound("Kategori Bulunamadı");
             }
             return NotFound("Kullanıcı Bulunamadı");
         }

@@ -79,6 +79,7 @@ namespace Helper.DataAccess.Helps
 
         public async Task<bool> CreateHelp(Help help)
         {
+            await _helperDbContext.AddAsync(help);
             await _helperDbContext.SaveChangesAsync();
             return true;
         }
