@@ -17,7 +17,7 @@ namespace Helper.Business.Helps
         Task<List<GetHelpDto>> GetAllUserHelps(string id);
         Task<GetHelpDto> GetHelpById(int id);
         Task<List<GetHelpDto>> GetHelpsByCategoryId(int id);
-        Task<bool> CreateHelp(string IdentityUserId, CreateHelpDto createHelpDto);
+        Task<bool> CreateHelp(string IdentityUserId, CreateHelpDto createHelpDto, List<string> tags);
         Task UpdateHelp(int helpId, string IdentityUserId, UpdateHelpDto updateHelpDto);
         Task<bool> DeleteHelp(string IdentityUserId, int deleteId);
         Task SetCheckedHelp(GetHelpDto checkedHelp);

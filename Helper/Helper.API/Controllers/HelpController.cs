@@ -2,10 +2,12 @@
 using Helper.Business.Helps;
 using Helper.Business.Helps.Dtos;
 using Helper.Business.Users;
+using Helper.Entites.Entites;
 using Helper.Entites.Identity;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 
 namespace Helper.API.Controllers
@@ -174,7 +176,7 @@ namespace Helper.API.Controllers
         [HttpPost]
         [Route("[action]")]
         [Authorize(Roles = "Admin,User")]
-        public async Task<IActionResult> CreateHelp([FromBody] CreateHelpDto createHelpDto)
+        public async Task<IActionResult> CreateHelp([FromQuery] List<string> tags, [FromBody] CreateHelpDto createHelpDto)
         {
             var user = await _userManager.GetUserAsync(User);
             if (user != null)
@@ -182,7 +184,7 @@ namespace Helper.API.Controllers
                 var category = await _categoryService.GetCategoryById(createHelpDto.CategoryId);
                 if (category != null)
                 {
-                    var result = await _helpService.CreateHelp(user.Id, createHelpDto);
+                    var result = await _helpService.CreateHelp(user.Id, createHelpDto, tags);
                     if (result)
                     {
                         return Ok("Başarıyla Oluşturuldu");

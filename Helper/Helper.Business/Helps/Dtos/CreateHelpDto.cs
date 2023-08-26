@@ -13,6 +13,6 @@ namespace Helper.Business.Helps.Dtos
         public string HelpTitle { get; set; }
         public string HelpText { get; set; }
         public int CategoryId { get; set; }
-        //public string[] Tags { get; set; }
+
     }
 }

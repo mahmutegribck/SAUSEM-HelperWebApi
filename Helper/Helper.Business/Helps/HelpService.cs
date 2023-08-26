@@ -76,11 +76,16 @@ namespace Helper.Business.Helps
             return categoryHelps;
         }
 
-        public async Task<bool> CreateHelp(string IdentityUserId, CreateHelpDto createHelpDto)
+        public async Task<bool> CreateHelp(string IdentityUserId, CreateHelpDto createHelpDto, List<string> tags)
         {
             Help help = _mapper.Map<Help>(createHelpDto);
             help.ApplicationUserId = IdentityUserId;
             help.HelpDate = DateTime.Now;
+            foreach (var tag in tags)
+            {
+                Tag tagHelp= _mapper.Map<Tag>(tag);
+                help.Tags.Add(tagHelp);
+            }
             return await _helpRepository.CreateHelp(help);
         }
 

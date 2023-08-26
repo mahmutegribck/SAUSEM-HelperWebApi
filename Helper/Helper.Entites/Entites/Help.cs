@@ -46,5 +46,6 @@ namespace Helper.Entites.Entites
 
 
         public ICollection<Tag> Tags { get; set; }
+
     }
 }
